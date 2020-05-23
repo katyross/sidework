@@ -9,16 +9,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public @Data class RestaurantModel {
+public @Data class Restaurant {
 
     private @Id @GeneratedValue
     @Setter(AccessLevel.PROTECTED) int id;
     private String name;
     private float foodTipOutPCT, barTipOutPCT, hourlyRate;
 
-    public RestaurantModel(){}
+    public Restaurant(){}
 
-    public RestaurantModel(String name, float foodTipOutPCT, float barTipOutPCT, float hourlyRate){
+    public Restaurant(String name, float foodTipOutPCT, float barTipOutPCT, float hourlyRate){
         this.name = name;
         //PCT = percentage
         this.foodTipOutPCT = foodTipOutPCT;

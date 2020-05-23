@@ -1,1 +1,21 @@
-<p>restaurant-info works!</p>
+<h2>Workplace Details</h2>
+
+<hr/>
+<div *ngIf="restaurant">
+  <div>
+    <label><b>Workplace Name: </b></label> {{restaurant.name}}
+  </div>
+  <div>
+    <label><b>Server Assistant TipOut: </b></label> {{restaurant.foodTipOutPCT}}
+  </div>
+  <div>
+    <label><b>Bar TipOut: </b></label> {{restaurant.barTipOutPCT}}
+  </div>
+  <div>
+    <label><b>Hourly Rate: </b></label> {{restaurant.hourlyRate}}
+  </div>
+</div>
+
+<br>
+<br>
+<button (click)="list()" class="btn btn-primary">Back to Restaurant List</button><br>

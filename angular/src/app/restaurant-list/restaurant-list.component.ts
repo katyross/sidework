@@ -20,7 +20,7 @@ export class RestaurantListComponent implements OnInit {
     this.reloadData();
   }
 reloadData(){
-    this.restaurant = this.restaurantService.getRestaurantlist();
+    this.restaurant = this.restaurantService.getRestaurantList();
 }
 deleteRestaurant(id: number) {
   this.restaurantService.deleteRestaurant(id)

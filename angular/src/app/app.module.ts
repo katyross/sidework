@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { CreateRestaurantComponent } from './create-restaurant/create-restaurant.component';
 import { RestaurantInfoComponent } from './restaurant-info/restaurant-info.component';
 import { RestaurantListComponent } from './restaurant-list/restaurant-list.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { RestaurantListComponent } from './restaurant-list/restaurant-list.compo
     RestaurantListComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,2 +1,3 @@
 rootProject.name = 'sidework'
 include 'spring'
+include 'angular'

@@ -21,12 +21,12 @@ export class RestaurantInfoComponent implements OnInit {
     this.restaurant = new Restaurant();
     this.id = this.route.snapshot.params['id'];
 
-    this.restaurantService.getRestaurant(this.id)
-      .subscribe(data =>{
-        console.log(data)
-        this.restaurant = data;
-      }, error => console.log(error));
-  }
+  //   this.restaurantService.getRestaurant(this.id)
+  //     .subscribe(data =>{
+  //       console.log(data)
+  //       this.restaurant = data;
+  //     }, error => console.log(error));
+   }
   list(){
     this.router.navigate(['restaurant']);
   }

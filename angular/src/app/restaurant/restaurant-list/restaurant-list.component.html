@@ -1,25 +1,20 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h2>Restaurant List</h2>
+    <h2>Restaurants You Work at:</h2>
   </div>
   <div class="panel-body">
     <table class="table table-striped">
       <thead>
       <tr>
         <th>Name</th>
-        <th>Server Assistant Tip Out</th>
-        <th>Bar Tip Out</th>
-        <th>Hourly Rate</th>
+
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let aRestaurant of restaurant | async">
         <td>{{aRestaurant.name}}</td>
-        <td>{{aRestaurant.foodTipOutPCT}}</td>
-        <td>{{aRestaurant.barTipOutPCT}}</td>
-        <td>{{aRestaurant.hourlyRate}}</td>
         <td><button (click)="deleteRestaurant(aRestaurant.id)" class="btn btn-danger">Delete</button>
-          <button (click)="restaurantDetails(aRestaurant.id)" class="btn btn-info" style="margin-left: 10px">Details</button>
+          <button (click)="restaurantDetails(aRestaurant.id)" class="btn btn-info" style="margin-left: 10px">Info</button>
         </td>
       </tr>
       </tbody>

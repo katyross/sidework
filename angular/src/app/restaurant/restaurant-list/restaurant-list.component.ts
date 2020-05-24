@@ -24,12 +24,12 @@ reloadData(){
 }
 deleteRestaurant(id: number) {
   this.restaurantService.deleteRestaurant(id)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.reloadData();
-      },
-      error => console.log(error));
+    //.subscribe(
+    //   data => {
+    //     console.log(data);
+    //     this.reloadData();
+    //   },
+    //   error => console.log(error));
     }
 
     restaurantDetails(id:number){

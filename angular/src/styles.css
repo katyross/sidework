@@ -4,9 +4,19 @@
 .footer {
   position: absolute;
   bottom: 0;
-  width:100%;
+  width: 100%;
   height: 70px;
-  background-color: palegreen;
-  text-align: center;
-  color: white;
+  background-color: darkgreen;
+  text-align: right;
+
 }
+.navbar {
+  width: 100%;
+  height: 80px;
+  color: dimgray;
+}
+.card {
+  margin-left: 375px;
+  position: absolute;
+}
+

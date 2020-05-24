@@ -3,26 +3,31 @@ package com.ross.sidework.controllers;
 import com.ross.sidework.data.RestaurantRepository;
 import com.ross.sidework.models.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("restaurants")
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class RestaurantController {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
     // list existing restaurants on index page
-    @GetMapping
-    public String getAllRestaurants(){
-        return  "restaurants/index";
+    @GetMapping("/restaurants")
+    public List<Restaurant> getAllRestaurants(){
+        return (List<Restaurant>) restaurantRepository.findAll();
     }
-    //create new restaurant, return to og restaurant tab
-    //TODO: Post mapping to landing page?
-    //public String process( @RequestBody Restaurant restaurant){
-       // return restaurantRepository.save(restaurant);
-   // }
+    //create new restaurant
+    @PostMapping("/restaurants")
+     void createRestaurant( @RequestBody Restaurant restaurant){
+          restaurantRepository.save(restaurant);
+    }
+    //delete restaurant
+    @DeleteMapping("/")
+    void deleteRestaurant(){
+
+    }
 
 }

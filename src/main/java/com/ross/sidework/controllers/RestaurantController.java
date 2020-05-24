@@ -16,9 +16,7 @@ public class RestaurantController {
 
     // list existing restaurants on index page
     @GetMapping
-    public String getAllRestaurants(Model model){
-        model.addAttribute("title", "Existing Workplaces");
-        model.addAttribute("restaurants", restaurantRepository.findAll());
+    public String getAllRestaurants(){
         return  "restaurants/index";
     }
     //create new restaurant, return to og restaurant tab

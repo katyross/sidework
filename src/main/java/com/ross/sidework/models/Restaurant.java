@@ -7,13 +7,16 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public @Data class Restaurant {
-
+    @NotNull
     private @Id @GeneratedValue
     @Setter(AccessLevel.PROTECTED) int id;
+    @NotNull
     private String name;
+    @NotNull
     private float foodTipOutPCT, barTipOutPCT, hourlyRate;
 
     public Restaurant(){}

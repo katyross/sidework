@@ -27,7 +27,7 @@ deleteRestaurant(id: number) {
       data => {
         console.log(data);
         this.reloadData();
-      };
+      });
     }
 
     restaurantDetails(id:number){

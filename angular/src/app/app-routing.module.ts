@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'restaurants', component: RestaurantListComponent },
   { path: 'addWork', component: CreateRestaurantComponent },
   //{ path: 'update/:id', component: UpdateRestaurantComponent },
-  { path: 'info/:id', component: RestaurantInfoComponent },
+  { path: 'restaurants/info/:id', component: RestaurantInfoComponent },
 ];
 
 @NgModule({

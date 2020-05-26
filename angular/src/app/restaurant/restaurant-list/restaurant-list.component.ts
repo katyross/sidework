@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RestaurantInfoComponent } from "../restaurant-info/restaurant-info.component";
 import { Observable} from "rxjs";
 import {RestaurantService} from "../restaurant.service";
 import {Router} from '@angular/router';
@@ -24,15 +23,14 @@ reloadData(){
 }
 deleteRestaurant(id: number) {
   this.restaurantService.deleteRestaurant(id)
-    //.subscribe(
-    //   data => {
-    //     console.log(data);
-    //     this.reloadData();
-    //   },
-    //   error => console.log(error));
+    .subscribe(
+      data => {
+        console.log(data);
+        this.reloadData();
+      };
     }
 
     restaurantDetails(id:number){
-    this.router.navigate(['info', id]);
+    this.router.navigate(['restaurants/info', id]);
   }
 }

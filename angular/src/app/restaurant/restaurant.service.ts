@@ -12,9 +12,9 @@ export class RestaurantService {
     this.restaurantUrl = 'http://localhost:8080/restaurants';
   }
 
-  // getRestaurant(id: number) {
-  //   //return this.http.get('${this.baseUrl}/${id}');
-  // }
+  getRestaurant(id: number) : Observable<any>{
+    return this.http.get(this.restaurantUrl +'/info/'+id);
+  }
 
   save(restaurant: Restaurant) {
     return this.http.post<Restaurant>(this.restaurantUrl,restaurant);

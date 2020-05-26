@@ -1,7 +1,6 @@
 import { Restaurant } from '../restaurant';
 import {Component, OnInit, Input} from '@angular/core';
 import { RestaurantService} from '../restaurant.service';
-import { RestaurantListComponent} from "../restaurant-list/restaurant-list.component";
 import { Router, ActivatedRoute} from "@angular/router";
 
 @Component({
@@ -21,13 +20,14 @@ export class RestaurantInfoComponent implements OnInit {
     this.restaurant = new Restaurant();
     this.id = this.route.snapshot.params['id'];
 
-  //   this.restaurantService.getRestaurant(this.id)
-  //     .subscribe(data =>{
-  //       console.log(data)
-  //       this.restaurant = data;
-  //     }, error => console.log(error));
+    this.restaurantService.getRestaurant(this.id)
+      .subscribe(data =>{
+        console.log(data)
+        this.restaurant = data;
+      });
    }
+
   list(){
-    this.router.navigate(['restaurant']);
+    this.router.navigate(['/restaurants']);
   }
 }

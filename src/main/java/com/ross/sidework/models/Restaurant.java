@@ -1,31 +1,35 @@
 package com.ross.sidework.models;
 
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Setter;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 @Entity
-public @Data class Restaurant {
-    @NotNull
-    private @Id @GeneratedValue
-    @Setter(AccessLevel.PROTECTED) int id;
-    @NotNull
+public @Data
+class Restaurant extends AbstractEntity{
+
+    @NotBlank(message = "Name required")
     private String name;
+
+    @DecimalMax(value = ".20", message = "must be a percentage between .2 and .01")
+    @DecimalMin(value = ".01", message = "must be a percentage between .2 and .01")
+    @NotBlank
+    private float foodTipOutPCT, barTipOutPCT;
+
     @NotNull
-    private float foodTipOutPCT, barTipOutPCT, hourlyRate;
+    @DecimalMax(value = "20.20", message = "must be below 20.20 ph")
+    @Min(0)
+    private float hourlyRate;
 
-    public Restaurant(){}
-
-    public Restaurant(String name, float foodTipOutPCT, float barTipOutPCT, float hourlyRate){
-        this.name = name;
-        //PCT = percentage
-        this.foodTipOutPCT = foodTipOutPCT;
-        this.barTipOutPCT = barTipOutPCT;
-        this.hourlyRate = hourlyRate;
+    public Restaurant(){
     }
+    public Restaurant(String name, float foodTipOutPCT, float barTipOutPCT, float hourlyRate){
+        super();
+        this.name = name;
+        this.hourlyRate = hourlyRate;
+        this.barTipOutPCT = barTipOutPCT;
+        this.foodTipOutPCT = foodTipOutPCT;
+    }
+
 }

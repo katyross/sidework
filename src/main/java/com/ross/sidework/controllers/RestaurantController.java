@@ -11,36 +11,32 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-
+@RequestMapping("/restaurants")
 public class RestaurantController {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
     // list existing restaurants on index page
-    @GetMapping("/restaurants")
+    @GetMapping
     public List<Restaurant> getAllRestaurants() {
         return (List<Restaurant>) restaurantRepository.findAll();
     }
 
     //create new restaurant
-    @PostMapping("/restaurants")
+    @PostMapping
     void createRestaurant(@RequestBody Restaurant restaurant) {
         restaurantRepository.save(restaurant);
     }
 
     // list one restaurants details
-    @GetMapping("/restaurants/info/{id}")
-    public Restaurant getRestaurantbyId(@PathVariable(value = "id") int id, Error errors) {
+    @GetMapping("/info/{id}")
+    public Restaurant getRestaurantbyId(@PathVariable(value = "id") int id) {
         Optional optRestaurant = restaurantRepository.findById(id);
-        //if (optRestaurant.isPresent()){
             Restaurant restaurant = (Restaurant) optRestaurant.get();
             return restaurant;
-        //} else {
-           // return;
     }
-
     // delete one restaurant
-    @DeleteMapping("/restaurants/{id}")
+    @DeleteMapping("/{id}")
     void deleteRestaurant(@PathVariable(value="id") int id){
          Optional optRestaurant = restaurantRepository.findById(id);
         if (optRestaurant.isPresent()){

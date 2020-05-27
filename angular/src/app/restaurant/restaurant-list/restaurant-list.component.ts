@@ -31,6 +31,6 @@ deleteRestaurant(id: number) {
     }
 
     restaurantDetails(id:number){
-    this.router.navigate(['restaurants/info', id]);
+    this.router.navigate(['/restaurants/info', id]);
   }
 }

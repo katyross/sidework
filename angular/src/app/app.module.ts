@@ -8,13 +8,16 @@ import { RestaurantService} from "./restaurant/restaurant.service";
 import { RestaurantInfoComponent } from './restaurant/restaurant-info/restaurant-info.component';
 import { RestaurantListComponent } from './restaurant/restaurant-list/restaurant-list.component';
 import {FormsModule} from "@angular/forms";
+import {ShiftService} from "./shift/shift.service";
+import { ShiftListComponent } from './shift/shift-list/shift-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateRestaurantComponent,
     RestaurantInfoComponent,
-    RestaurantListComponent
+    RestaurantListComponent,
+    ShiftListComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +25,10 @@ import {FormsModule} from "@angular/forms";
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [RestaurantService],
+  providers: [
+    RestaurantService,
+    ShiftService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

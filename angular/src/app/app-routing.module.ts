@@ -3,14 +3,18 @@ import { CreateRestaurantComponent } from './restaurant/create-restaurant/create
 import { NgModule} from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RestaurantListComponent } from './restaurant/restaurant-list/restaurant-list.component';
-//import { UpdateRestaurantComponent } from './update-restaurant/update-restaurant.component';
+import {ShiftListComponent} from "./shift/shift-list/shift-list.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'restaurants', pathMatch: 'full' },
+  //restaurants
+  //{ path: '', redirectTo: 'restaurants', pathMatch: 'full' },
   { path: 'restaurants', component: RestaurantListComponent },
   { path: 'addWork', component: CreateRestaurantComponent },
-  //{ path: 'update/:id', component: UpdateRestaurantComponent },
   { path: 'restaurants/info/:id', component: RestaurantInfoComponent },
+  //shifts
+  { path: 'shifts', component: ShiftListComponent},
+  { path: 'addShifts', component: CreateShiftComponent},
+  { path: 'shifts/info/:id', component: ShiftInfoComponent},
 ];
 
 @NgModule({

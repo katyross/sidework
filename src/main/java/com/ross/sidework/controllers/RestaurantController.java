@@ -16,7 +16,7 @@ public class RestaurantController {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
-    // list existing restaurants on index page
+    // list existing restaurants
     @GetMapping
     public List<Restaurant> getAllRestaurants() {
         return (List<Restaurant>) restaurantRepository.findAll();

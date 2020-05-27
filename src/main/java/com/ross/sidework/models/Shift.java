@@ -33,6 +33,7 @@ public @Data class Shift extends AbstractEntity{
         this.barSales = barSales;
         this.ccTips = ccTips;
         this.cashTips = cashTips;
+        this.dateOfShift = dateOfShift;
         this.restaurant = restaurant;
     }
 }

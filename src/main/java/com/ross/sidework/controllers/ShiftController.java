@@ -26,11 +26,8 @@ public class ShiftController {
 
     //create new shift
     @PostMapping
-    void createShift(@RequestBody @Valid Shift shift, Errors errors) {
-        if (errors.hasErrors()){
-        } else {
+    void createShift(@RequestBody Shift shift) {
             shiftRepository.save(shift);
-        }
     }
 
     // list one shift's details

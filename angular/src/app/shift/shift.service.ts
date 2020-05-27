@@ -12,7 +12,7 @@ export class ShiftService {
     this.shiftUrl = 'http://localhost:8080/shifts'
   }
 
-  public save(shift: Shift) {
+  public saveShift(shift: Shift) {
     return this.http.post<Shift>(this.shiftUrl,shift);
   }
 

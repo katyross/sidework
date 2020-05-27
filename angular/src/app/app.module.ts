@@ -10,6 +10,7 @@ import { RestaurantListComponent } from './restaurant/restaurant-list/restaurant
 import {FormsModule} from "@angular/forms";
 import {ShiftService} from "./shift/shift.service";
 import { ShiftListComponent } from './shift/shift-list/shift-list.component';
+import { ShiftFormComponent } from './shift/shift-form/shift-form.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ShiftListComponent } from './shift/shift-list/shift-list.component';
     CreateRestaurantComponent,
     RestaurantInfoComponent,
     RestaurantListComponent,
-    ShiftListComponent
+    ShiftListComponent,
+    ShiftFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,7 @@ import { Router, ActivatedRoute} from "@angular/router";
 export class RestaurantInfoComponent implements OnInit {
 
   id: number;
-  restaurant: Restaurant;
+  restaurant: object;
 
   constructor(private route: ActivatedRoute, private router: Router,
               private restaurantService: RestaurantService) { }

@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { Shift.ServiceService } from './shift.service.service';
+import { ShiftService } from './shift.service';
 
 describe('Shift.ServiceService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: Shift.ServiceService = TestBed.get(Shift.ServiceService);
+    const service: ShiftService = TestBed.get(ShiftService);
     expect(service).toBeTruthy();
   });
 });

@@ -20,10 +20,10 @@ export class RestaurantService {
     return this.http.post<Restaurant>(this.restaurantUrl,restaurant);
   }
 
-  // updateRestaurant(id: number, value: any): Observable<Object> {
-  //   return this.http.put('${this.baseUrl}/${id}', value);
-  // }
-  //
+  updateRestaurant(id: number, value: any): Observable<Object> {
+    return this.http.put(this.restaurantUrl + "/info/" + id, value);
+  }
+
 
   deleteRestaurant(id: number){
     return this.http.delete(this.restaurantUrl +"/"+id);

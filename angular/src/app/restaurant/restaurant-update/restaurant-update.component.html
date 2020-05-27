@@ -1,0 +1,27 @@
+<h3>Update Workplace:</h3>
+<div style="width: 300px;">
+  <form (ngSubmit)="onSubmit()" #updateRestaurant="ngForm">
+    <div *ngIf="restaurant">
+    <div class="form-group">
+      <label for="name">Restaurant Name</label>
+      <input type="text" value='{{restaurant.name}}'class="form-control" id="name" required [(ngModel)]="restaurant.name" name="name">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Server Assistant Tip Out Rate</label>
+      <input type="text" value='{{restaurant.foodTipOutPCT}}' class="form-control" id="foodTipOutPCT" required [(ngModel)]="restaurant.foodTipOutPCT" name="foodTipOutPCT">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Bar Tip Out Rate</label>
+      <input type="text" value='{{restaurant.barTipOutPCT}}' class="form-control" id="barTipOutPCT" required [(ngModel)]="restaurant.barTipOutPCT" name="barTipOutPCT">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Hourly Rate</label>
+      <input type="text" value='{{restaurant.hourlyRate}}' class="form-control" id="hourlyRate" required [(ngModel)]="restaurant.hourlyRate" name="hourlyRate">
+    </div>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>

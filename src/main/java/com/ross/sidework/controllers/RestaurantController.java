@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.Option;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +35,21 @@ public class RestaurantController {
         Optional optRestaurant = restaurantRepository.findById(id);
             Restaurant restaurant = (Restaurant) optRestaurant.get();
             return restaurant;
+    }
+     //update single restaurant
+    @PutMapping("/update/{id}")
+    public Restaurant updateRestaurant(@PathVariable(value = "id") int id,
+                                       @Valid @RequestBody Restaurant restaurantInfo){
+        //find restaurant
+        Optional optRestaurant = restaurantRepository.findById(id);
+        Restaurant restaurant = (Restaurant) optRestaurant.get();
+        // set restaurant details in repository to restaurant details provided
+        restaurant.setName(restaurantInfo.getName());
+        restaurant.setFoodTipOutPCT(restaurantInfo.getFoodTipOutPCT());
+        restaurant.setBarTipOutPCT(restaurantInfo.getBarTipOutPCT());
+        restaurant.setHourlyRate(restaurantInfo.getHourlyRate());
+        // return updated restaurant
+        return restaurant;
     }
     // delete one restaurant
     @DeleteMapping("/{id}")

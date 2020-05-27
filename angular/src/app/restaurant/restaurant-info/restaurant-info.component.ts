@@ -30,4 +30,8 @@ export class RestaurantInfoComponent implements OnInit {
   list(){
     this.router.navigate(['/restaurants']);
   }
+
+  update(){
+    this.router.navigate(['/restaurants/update/'+ this.id]);
+  }
 }

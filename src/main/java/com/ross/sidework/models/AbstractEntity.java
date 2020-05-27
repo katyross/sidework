@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-@NoArgsConstructor
 @Getter
 public @Data abstract class AbstractEntity {
     @Id

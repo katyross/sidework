@@ -11,6 +11,7 @@ import {RestaurantService} from "../../restaurant/restaurant.service";
   templateUrl: './shift-form.component.html',
   styleUrls: ['./shift-form.component.css']
 })
+
 export class ShiftFormComponent implements OnInit{
   shift: Shift;
   restaurant: Observable<Restaurant[]>;
@@ -19,8 +20,9 @@ export class ShiftFormComponent implements OnInit{
               private restaurantService: RestaurantService,
               private route: ActivatedRoute,
               private router: Router) {
-    this.shift = new Shift();
+              this.shift = new Shift();
   }
+ //TODO CREATE RESTAURANT OBJECT, FIX BOTH CHECKBOXES CLICKING AT SAME TIME
 
   ngOnInit(){
     this.reloadData();

@@ -15,16 +15,17 @@ class Restaurant extends AbstractEntity{
     @DecimalMax(value = ".20", message = "must be a percentage between .2 and .01")
     @DecimalMin(value = ".01", message = "must be a percentage between .2 and .01")
     @NotBlank
-    private float foodTipOutPCT, barTipOutPCT;
+    private double foodTipOutPCT, barTipOutPCT;
 
     @NotNull
     @DecimalMax(value = "20.20", message = "must be below 20.20 ph")
     @Min(0)
-    private float hourlyRate;
+    private double hourlyRate;
 
     public Restaurant(){
     }
-    public Restaurant(String name, float foodTipOutPCT, float barTipOutPCT, float hourlyRate){
+
+    public Restaurant(String name, double foodTipOutPCT, double barTipOutPCT, double hourlyRate){
         super();
         this.name = name;
         this.hourlyRate = hourlyRate;

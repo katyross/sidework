@@ -29,7 +29,6 @@ export class RestaurantUpdateComponent implements OnInit {
   updateRestaurant(){
     this.restaurantService.updateRestaurant(this.id, this.restaurant)
       .subscribe(data => console.log(data));
-    //this.restaurant = new Restaurant();
     this.list();
   }
 

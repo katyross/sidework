@@ -1,3 +1,6 @@
+import {Restaurant} from "../restaurant/restaurant";
+
+
 export class Shift {
   id: number
   foodSales: number;
@@ -5,5 +8,7 @@ export class Shift {
   ccTips: number;
   cashTips: number;
   dateOfShift: string;
-  restaurant: object;
+  restaurantWorked: Restaurant;
 }
+
+

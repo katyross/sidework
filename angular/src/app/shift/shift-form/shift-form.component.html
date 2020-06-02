@@ -1,6 +1,6 @@
 <h3>Add Shift:</h3>
 <div style="width: 300px;">
-  <form (ngSubmit)="onSubmit()" #createShift="ngForm">
+  <form (ngSubmit)="onSubmit(createShift.value)" #createShift="ngForm">
     <div class="form-group">
       <label for="dateOfShift">Date of Shift</label>
       <input type="text" class="form-control" id="dateOfShift" required [(ngModel)]="shift.dateOfShift" name="dateOfShift">
@@ -11,29 +11,34 @@
       <input type="text" class="form-control" id="foodSales" required [(ngModel)]="shift.foodSales" name="foodSales">
     </div>
 
-    <div class="form-group2">
+    <div class="form-group">
       <label for="barSales">Bar Sales</label>
       <input type="text" class="form-control" id="barSales" required [(ngModel)]="shift.barSales" name="barSales">
     </div>
 
-    <div class="form-group2">
+    <div class="form-group">
       <label for="ccTips">Credit Card Tips</label>
       <input type="text" class="form-control" id="ccTips" required [(ngModel)]="shift.ccTips" name="ccTips">
     </div>
 
-    <div class="form-group2">
+    <div class="form-group">
       <label for="cashTips">Cash Tips</label>
       <input type="text" class="form-control" id="cashTips" required [(ngModel)]="shift.cashTips" name="cashTips">
     </div>
 
-    <div class="form-group">
-      <label *ngFor="let aRestaurant of restaurant | async">
-      <input type="checkbox" name="restaurant"
-             id="restaurant" class="form-control"
-             required [(ngModel)]="shift.restaurant">
-        {{aRestaurant.name}}
-      </label>
-    </div>
+      <div class = "form-group">
+      <label>Select Workplace:</label><br>
+        <select required [(ngModel)]="shift.restaurantWorked"
+          name = "restaurantWorked"
+                id="restaurantId">
+        <option *ngFor="let aRestaurant of restaurantList"
+                text="{{aRestaurant.name}}"
+                [ngValue]="aRestaurant">
+        </option>
+        </select>
+      </div>
+
+  <pre>{{createShift.value | json}}</pre>
 
     <button type="submit" class="btn btn-success">Submit</button>
   </form>

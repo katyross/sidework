@@ -1,44 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ShiftService} from "../shift.service";
 import {Shift} from "../shift";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Restaurant} from "../../restaurant/restaurant";
-import {Observable} from "rxjs";
 import {RestaurantService} from "../../restaurant/restaurant.service";
 
 @Component({
   selector: 'app-shift-form',
   templateUrl: './shift-form.component.html',
-  styleUrls: ['./shift-form.component.css']
+  styleUrls: ['./shift-form.component.css'],
 })
 
-export class ShiftFormComponent implements OnInit{
+export class ShiftFormComponent implements OnInit {
   shift: Shift;
-  restaurant: Observable<Restaurant[]>;
+  restaurantList: Restaurant[];
 
   constructor(private shiftService: ShiftService,
               private restaurantService: RestaurantService,
               private route: ActivatedRoute,
               private router: Router) {
-              this.shift = new Shift();
+    this.shift = new Shift();
+    this.restaurantList = [];
   }
- //TODO CREATE RESTAURANT OBJECT, FIX BOTH CHECKBOXES CLICKING AT SAME TIME
 
+  // load workplaces
   ngOnInit(){
-    this.reloadData();
+  this.getRestaurants();
   }
-  reloadData(){
-    this.restaurant = this.restaurantService.getRestaurantList();
+  getRestaurants(): any{
+    this.shiftService.getAllRestaurants().then(successResponse => {this.restaurantList = successResponse;
+    })
+      .catch(errorResponse => {
+
+      });
   }
 
 // save new object on submit
-  onSubmit() {
-    this.shiftService.saveShift(this.shift)
-      .subscribe(result => this.goToShiftList());
+  onSubmit(shift: any) {
+    // find restaurantWorked
+    this.shiftService.saveShift(shift)
+      .then(successResponse =>{
+      this.goToShiftList();
+    })
+      .catch(errorResponse => {
+
+      });
   }
+
   //go to the list of shifts once shift is submitted
-  ;
   goToShiftList(){
     this.router.navigate(['/shifts']);
   }
+
 }

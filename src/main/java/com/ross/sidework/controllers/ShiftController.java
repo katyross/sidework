@@ -1,13 +1,11 @@
 package com.ross.sidework.controllers;
 
+import com.ross.sidework.data.RestaurantRepository;
 import com.ross.sidework.data.ShiftRepository;
-import com.ross.sidework.models.Restaurant;
 import com.ross.sidework.models.Shift;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +15,8 @@ import java.util.Optional;
 public class ShiftController {
     @Autowired
     private ShiftRepository shiftRepository;
+    @Autowired
+    RestaurantRepository restaurantRepository;
 
     // list existing shifts
     @GetMapping
@@ -27,7 +27,7 @@ public class ShiftController {
     //create new shift
     @PostMapping
     void createShift(@RequestBody Shift shift) {
-            shiftRepository.save(shift);
+        shiftRepository.save(shift);
     }
 
     // list one shift's details

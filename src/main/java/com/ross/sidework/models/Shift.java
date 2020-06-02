@@ -1,14 +1,23 @@
 package com.ross.sidework.models;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.*;
-import javax.xml.transform.Source;
+
+import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
-public @Data class Shift extends AbstractEntity {
+//@EqualsAndHashCode(callSuper = true)
+@Table(name="shift")
+public @Data class Shift  {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private int id;
 
     @NotNull
     @Min(value = 0, message = "must be between 0 and 10000")
@@ -24,16 +33,16 @@ public @Data class Shift extends AbstractEntity {
     @NotBlank(message = "enter date of shift in dd/mm/yyyy format")
     private String dateOfShift;
 
-    @ManyToOne
-    @NotNull(message = "select the restaurant you worked at for this shift")
+    @ManyToOne(optional = false)
+    @JoinColumn(name="restaurant_id", referencedColumnName="id")
     private Restaurant restaurant;
 
     public Shift (){}
 
 
-    public Shift(double foodSales, double barSales, double ccTips,
+    public Shift(int id, double foodSales, double barSales, double ccTips,
                  double cashTips, String dateOfShift, Restaurant restaurant){
-        super();
+        this.id = id;
         this.foodSales = foodSales;
         this.barSales = barSales;
         this.ccTips = ccTips;
@@ -42,19 +51,17 @@ public @Data class Shift extends AbstractEntity {
         this.restaurant = restaurant;
     }
 
-
-    public double getTipOutDeductions(){
-        // calculate amount to be removed from tips based on tipout rate for sales based on if they are bar sales or food sales
-        double foodTipOut = this.foodSales * this.restaurant.getFoodTipOutPCT();
-        double barTipOut = (this.barSales * this.restaurant.getFoodTipOutPCT()) +
-                (this.barSales * this.restaurant.getBarTipOutPCT());
-        // add amounts together, multiply by one to subtract from tips
-        double totalTipOut = (foodTipOut + barTipOut) * -1;
-        return totalTipOut;
-    }
-
-    public double getTakeHomePay(){
-       return  this.cashTips + this.ccTips + this.getTipOutDeductions();
-    }
-
-}
+//    public double getTipOutDeductions(){
+//        // calculate amount to be removed from tips based on tipout rate for sales based on if they are bar sales or food sales
+//        double foodTipOut = this.foodSales * this.restaurant.getFoodTipOutPCT();
+//        double barTipOut = (this.barSales * this.restaurant.getFoodTipOutPCT()) +
+//                (this.barSales * this.restaurant.getBarTipOutPCT());
+//        // add amounts together, multiply by one to subtract from tips
+//        double totalTipOut = (foodTipOut + barTipOut) * -1;
+//        return totalTipOut;
+//    }
+//
+//    public double getTakeHomePay(){
+//       return  this.cashTips + this.ccTips + this.getTipOutDeductions();
+//    }
+   }

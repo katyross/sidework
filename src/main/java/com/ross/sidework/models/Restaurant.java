@@ -1,20 +1,29 @@
 package com.ross.sidework.models;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Setter;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 
 @Entity
-public @Data
-class Restaurant extends AbstractEntity{
+@Table(name="restaurant")
+//@EqualsAndHashCode(callSuper = true)
+public @Data class Restaurant{
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+     @Setter(AccessLevel.PROTECTED)
+     private int id;
 
     @NotBlank(message = "Name required")
+    @Size(min=3, max=20, message = "Name must be between 3 and 20 characters")
     private String name;
 
-    @DecimalMax(value = ".20", message = "must be a percentage between .2 and .01")
-    @DecimalMin(value = ".01", message = "must be a percentage between .2 and .01")
-    @NotBlank
+    @DecimalMax(value = ".20", message = "must be a percentage between .2 and 0")
+    @DecimalMin(value = ".00", message = "must be a percentage between .2 and 0")
+    @NotNull
     private double foodTipOutPCT, barTipOutPCT;
 
     @NotNull
@@ -22,11 +31,10 @@ class Restaurant extends AbstractEntity{
     @Min(0)
     private double hourlyRate;
 
-    public Restaurant(){
-    }
+    public Restaurant(){ }
 
     public Restaurant(String name, double foodTipOutPCT, double barTipOutPCT, double hourlyRate){
-        super();
+        this.id = id;
         this.name = name;
         this.hourlyRate = hourlyRate;
         this.barTipOutPCT = barTipOutPCT;

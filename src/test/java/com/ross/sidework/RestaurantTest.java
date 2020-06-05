@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 
 public class RestaurantTest {
-    private Restaurant testRestaurant = new Restaurant("3 Monkeys", .025, .035,5.46);
+    private Restaurant testRestaurant = new Restaurant("3 Monkeys", .025, .035, 5.46);
     private ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
     private Validator validator = validatorFactory.getValidator();
     private Restaurant wrongTestRestaurant;
@@ -32,7 +32,7 @@ public class RestaurantTest {
     @Test
     public void detectsInvalidName() {
         // too high of foodSales input
-        wrongTestRestaurant = new Restaurant ("x",.025,.035,5.46);
+        wrongTestRestaurant = new Restaurant ( "x", .025, .035, 5.46);
         Set<ConstraintViolation<Restaurant>> violations = validator.validate(wrongTestRestaurant);
         assertEquals(violations.size(),1,.00);
 
@@ -43,7 +43,7 @@ public class RestaurantTest {
     @Test
     public void detectsInvalidTipOutPCT() {
         // too high of foodSales input
-        wrongTestRestaurant = new Restaurant ("xxx",.0,.35,5.46);
+        wrongTestRestaurant = new Restaurant ( "xxx", .0, .35, 5.46);
         Set<ConstraintViolation<Restaurant>> violations = validator.validate(wrongTestRestaurant);
         assertEquals(violations.size(),1,.00);
 

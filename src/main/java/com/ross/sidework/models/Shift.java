@@ -13,10 +13,9 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 //@EqualsAndHashCode(callSuper = true)
-@Table(name="shift")
 public @Data class Shift  {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue
     private int id;
 
     @NotNull
@@ -33,16 +32,14 @@ public @Data class Shift  {
     @NotBlank(message = "enter date of shift in dd/mm/yyyy format")
     private String dateOfShift;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name="restaurant_id", referencedColumnName="id")
+    @ManyToOne
     private Restaurant restaurant;
 
     public Shift (){}
 
 
-    public Shift(int id, double foodSales, double barSales, double ccTips,
+    public Shift( double foodSales, double barSales, double ccTips,
                  double cashTips, String dateOfShift, Restaurant restaurant){
-        this.id = id;
         this.foodSales = foodSales;
         this.barSales = barSales;
         this.ccTips = ccTips;
@@ -51,17 +48,17 @@ public @Data class Shift  {
         this.restaurant = restaurant;
     }
 
-//    public double getTipOutDeductions(){
-//        // calculate amount to be removed from tips based on tipout rate for sales based on if they are bar sales or food sales
-//        double foodTipOut = this.foodSales * this.restaurant.getFoodTipOutPCT();
-//        double barTipOut = (this.barSales * this.restaurant.getFoodTipOutPCT()) +
-//                (this.barSales * this.restaurant.getBarTipOutPCT());
-//        // add amounts together, multiply by one to subtract from tips
-//        double totalTipOut = (foodTipOut + barTipOut) * -1;
-//        return totalTipOut;
-//    }
-//
-//    public double getTakeHomePay(){
-//       return  this.cashTips + this.ccTips + this.getTipOutDeductions();
-//    }
+    public double getTipOutDeductions(){
+        // calculate amount to be removed from tips based on tipout rate for sales based on if they are bar sales or food sales
+        double foodTipOut = this.foodSales * this.restaurant.getFoodTipOutPCT();
+        double barTipOut = (this.barSales * this.restaurant.getFoodTipOutPCT()) +
+                (this.barSales * this.restaurant.getBarTipOutPCT());
+        // add amounts together, multiply by one to subtract from tips
+        double totalTipOut = (foodTipOut + barTipOut) * -1;
+        return totalTipOut;
+    }
+
+    public double getTakeHomePay(){
+       return  this.cashTips + this.ccTips + this.getTipOutDeductions();
+    }
    }

@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
 
 public class ShiftTest {
 
-    private  Restaurant testRestaurant = new Restaurant("3 Monkeys", .025, .035,5.46);
+    private  Restaurant testRestaurant = new Restaurant("3 Monkeys", .025, .035, 5.46);
     private  Shift testShift = new Shift(234.00, 345.00, 94.67, 13.00, "21/01/2022", testRestaurant);
     private static ValidatorFactory validatorFactory= Validation.buildDefaultValidatorFactory();;
     private static Validator validator= validatorFactory.getValidator();;

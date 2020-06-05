@@ -8,7 +8,7 @@ export class Shift {
   ccTips: number;
   cashTips: number;
   dateOfShift: string;
-  restaurantWorked: Restaurant;
+  restaurant: Restaurant;
 }
 
 

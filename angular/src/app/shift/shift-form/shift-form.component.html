@@ -28,17 +28,15 @@
 
       <div class = "form-group">
       <label>Select Workplace:</label><br>
-        <select required [(ngModel)]="shift.restaurantWorked"
-          name = "restaurantWorked"
-                id="restaurantId">
+        <select required [(ngModel)]="shift.restaurant"
+          name = "restaurant"
+                id="restaurant">
         <option *ngFor="let aRestaurant of restaurantList"
                 text="{{aRestaurant.name}}"
                 [ngValue]="aRestaurant">
         </option>
         </select>
       </div>
-
-  <pre>{{createShift.value | json}}</pre>
 
     <button type="submit" class="btn btn-success">Submit</button>
   </form>

@@ -10,28 +10,33 @@ import {Router} from "@angular/router";
   styleUrls: ['./shift-list.component.css']
 })
 export class ShiftListComponent implements OnInit {
-    shift: Observable<Shift[]>;
+  shiftList: Shift[];
+  aShift: Shift;
   constructor(private shiftService: ShiftService,
-              private router: Router) { }
+              private router: Router) {
+    this.shiftList = [];
+  }
 
   ngOnInit() {
-    this.reloadData();
+    this.getAllShifts();
   }
-  reloadData(){
-    this.shift = this.shiftService.getShiftList();
-  }
-  deleteShift(id: number) {
-    this.shiftService.deleteShift(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.reloadData();
-        });
-    }
 
-    getShift(id:number){
-    this.router.navigate(['/shifts/info', id]);
-    }
+  getAllShifts(): any {
+    return this.shiftService.getShiftList().then(successResponse => {
+      this.shiftList = successResponse;
+    })
+      .catch(errorResponse => {
+        //error here
+      })
   }
+
+  getShift(id: number) {
+    this.router.navigate(['/shifts/info', id])
+      .then(successResponse => {
+        this.aShift = new Shift()
+      });
+  }
+}
+
 
 

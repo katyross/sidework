@@ -2,19 +2,16 @@ package com.ross.sidework.models;
 
 import lombok.AccessLevel;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 @Entity
-@Table(name="restaurant")
-//@EqualsAndHashCode(callSuper = true)
 public @Data class Restaurant{
+
      @Id
-     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     @Setter(AccessLevel.PROTECTED)
+     @GeneratedValue
      private int id;
 
     @NotBlank(message = "Name required")
@@ -33,8 +30,7 @@ public @Data class Restaurant{
 
     public Restaurant(){ }
 
-    public Restaurant(String name, double foodTipOutPCT, double barTipOutPCT, double hourlyRate){
-        this.id = id;
+    public Restaurant( String name, double foodTipOutPCT, double barTipOutPCT, double hourlyRate){
         this.name = name;
         this.hourlyRate = hourlyRate;
         this.barTipOutPCT = barTipOutPCT;

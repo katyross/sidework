@@ -4,5 +4,4 @@ export class Restaurant {
   foodTipOutPCT: number;
   barTipOutPCT: number;
   hourlyRate: number;
-
 }

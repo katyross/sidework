@@ -27,8 +27,11 @@ export class ShiftFormComponent implements OnInit {
   ngOnInit(){
   this.getRestaurants();
   }
+
+
   getRestaurants(): any{
-    this.shiftService.getAllRestaurants().then(successResponse => {this.restaurantList = successResponse;
+    this.shiftService.getAllRestaurants().then(successResponse => {
+      this.restaurantList = successResponse;
     })
       .catch(errorResponse => {
 

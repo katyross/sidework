@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Shift} from "./shift";
-import {Observable} from "rxjs";
-import {NgForm} from "@angular/forms";
-import {Restaurant} from "../restaurant/restaurant";
 
 @Injectable(
 )
@@ -22,17 +19,26 @@ export class ShiftService {
     (this.handleSuccess).catch(this.handleError);
   }
 
-  deleteShift(id: number){
-    return this.http.delete(this.shiftUrl +"/"+id);
+  deleteShift(id): Promise<any>{
+    return this.http.delete(this.shiftUrl +"/"+id).toPromise()
+      .then(this.handleSuccess).catch(this.handleError);
   }
 
-  getShiftList(): Observable<Shift[]>{
-    return this.http.get<Shift[]>(this.shiftUrl);
+  getShiftList(){
+    return this.http.get(this.shiftUrl).toPromise()
+      .then(this.handleSuccess).catch(this.handleError);
   }
+
   // view individual shift
   getShift(id: number){
-    return this.http.get<Shift>(this.shiftUrl+"/"+id);
+    return this.http.get(this.shiftUrl+"/"+id).toPromise()
+      .then(this.handleSuccess).catch(this.handleError);
   }
+  updateShift(id: number, value: any): Promise<any>{
+    return this.http.put(this.shiftUrl+"/"+id, value).toPromise()
+      .then(this.handleSuccess).catch(this.handleError);
+  }
+
   private handleSuccess(successResponse): Promise<any>{ return Promise.resolve(successResponse)}
   private handleError(errorResponse):Promise<any>{return Promise.resolve(errorResponse)}
 }

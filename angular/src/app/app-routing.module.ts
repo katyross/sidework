@@ -18,7 +18,6 @@ const routes: Routes = [
   //shifts
   { path: 'shifts', component: ShiftListComponent},
   { path: 'shifts/addShift', component: ShiftFormComponent},
- // { path: 'shifts/info/:id', component: ShiftInfoComponent},
 ];
 
 @NgModule({

@@ -1,0 +1,22 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Shifts you've worked:</h2>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Workplace name</th>
+        <th>Date Worked</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let aShift of shiftList ">
+        <td>{{aShift.id}}</td>
+        <td>{{aShift.dateOfShift}}</td>
+          <button (click)="getShift(aShift.id)" class="btn btn-info" style="margin-left: 10px">Info</button>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

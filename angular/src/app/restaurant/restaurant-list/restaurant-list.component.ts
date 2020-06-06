@@ -18,9 +18,11 @@ export class RestaurantListComponent implements OnInit {
   ngOnInit() {
     this.reloadData();
   }
+
 reloadData(){
     this.restaurant = this.restaurantService.getRestaurantList();
 }
+
 deleteRestaurant(id: number) {
   this.restaurantService.deleteRestaurant(id)
     .subscribe(

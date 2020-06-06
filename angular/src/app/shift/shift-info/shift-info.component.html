@@ -1,0 +1,28 @@
+<h2>Workplace Details</h2>
+
+<hr/>
+<div *ngIf="shift">
+
+  <div>
+    <label><b>DATE: </b></label> {{shift.dateOfShift}}
+  </div>
+  <div>
+    <label><b>CC TIPS: </b></label> {{shift.ccTips}}
+  </div>
+  <div>
+    <label><b>CASH TIPS: </b></label> {{shift.cashTips}}
+  </div>
+  <div>
+    <label><b>BAR SALES: </b></label> {{shift.barSales}}
+  </div>
+  <div>
+    <label><b>FOOD SALES: </b></label> {{shift.foodSales}}
+  </div>
+
+</div>
+
+<br>
+<br>
+<button (click)="list()" class="btn btn-primary">Back to Shift List</button><br>
+<button (click)="deleteShift(shift.id)" class="btn btn-danger">Delete</button>
+<button (click)="update()" class="btn btn-link">Update</button><br>

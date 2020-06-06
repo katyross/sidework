@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable} from "rxjs";
 import {Shift} from "../shift";
 import {ShiftService} from "../shift.service";
 import {Router} from "@angular/router";
@@ -10,31 +9,28 @@ import {Router} from "@angular/router";
   styleUrls: ['./shift-list.component.css']
 })
 export class ShiftListComponent implements OnInit {
-  shiftList: Shift[];
-  aShift: Shift;
+  shiftList: Array<Shift[]> =[];
+
   constructor(private shiftService: ShiftService,
               private router: Router) {
-    this.shiftList = [];
   }
 
   ngOnInit() {
     this.getAllShifts();
   }
 
-  getAllShifts(): any {
-    return this.shiftService.getShiftList().then(successResponse => {
+  getAllShifts(){
+    return this.shiftService.getShiftList()
+      .then( successResponse => {
       this.shiftList = successResponse;
     })
-      .catch(errorResponse => {
+     .catch(errorResponse => {
         //error here
-      })
+    })
   }
 
   getShift(id: number) {
-    this.router.navigate(['/shifts/info', id])
-      .then(successResponse => {
-        this.aShift = new Shift()
-      });
+    this.router.navigate(['/shifts/info', id]);
   }
 }
 

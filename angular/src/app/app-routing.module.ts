@@ -7,6 +7,7 @@ import { RestaurantListComponent } from './restaurant/restaurant-list/restaurant
 import {ShiftListComponent} from "./shift/shift-list/shift-list.component";
 import {ShiftFormComponent} from "./shift/shift-form/shift-form.component";
 import {RestaurantUpdateComponent} from "./restaurant/restaurant-update/restaurant-update.component";
+import {ShiftUpdateComponent} from "./shift/shift-update/shift-update.component";
 import {ShiftInfoComponent} from "./shift/shift-info/shift-info.component";
 
 const routes: Routes = [
@@ -19,7 +20,8 @@ const routes: Routes = [
   //shifts
   { path: 'shifts', component: ShiftListComponent},
   { path: 'shifts/addShift', component: ShiftFormComponent},
-  { path: 'shifts/info/:id', component: ShiftInfoComponent}
+  { path: 'shifts/info/:id', component: ShiftInfoComponent},
+  { path: 'shifts/update/:id', component: ShiftUpdateComponent}
 ];
 
 @NgModule({

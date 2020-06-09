@@ -7,6 +7,7 @@ import com.ross.sidework.models.Shift;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +43,9 @@ public class ShiftController {
     public Shift getShiftById(@PathVariable(value = "id") int id) {
         Optional optShift = shiftRepository.findById(id);
         Shift shift = (Shift) optShift.get();
+        Optional optRestaurant = restaurantRepository.findById(shift.getRestaurant().getId());
+        Restaurant restaurant = (Restaurant) optRestaurant.get();
+        shift.setRestaurant(restaurant);
         return shift;
     }
 
@@ -53,5 +57,23 @@ public class ShiftController {
             Shift shift = (Shift) optShift.get();
             shiftRepository.delete(shift);
         }
+    }
+
+    @PutMapping("/update/{id}")
+    public Shift updateShift(@PathVariable(value="id") int id,
+                     @Valid @RequestBody Shift shiftInfo){
+        Optional optShift = shiftRepository.findById(id);
+        Optional optRestaurant = restaurantRepository.findById(shiftInfo.getRestaurant().getId());
+        Restaurant restaurant = (Restaurant) optRestaurant.get();
+        Shift shift = (Shift) optShift.get();
+                shift.setRestaurant(restaurant);
+                shift.setBarSales(shiftInfo.getBarSales());
+                shift.setCashTips(shiftInfo.getCashTips());
+                shift.setCcTips(shiftInfo.getCcTips());
+                shift.setFoodSales(shiftInfo.getFoodSales());
+                shift.setRestaurant(shiftInfo.getRestaurant());
+            return shift;
+
+
     }
 }

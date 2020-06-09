@@ -3,6 +3,7 @@ import {Shift} from "../shift";
 import {ShiftService} from "../shift.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Restaurant} from "../../restaurant/restaurant";
+import {RestaurantService} from "../../restaurant/restaurant.service";
 
 @Component({
   selector: 'app-shift-info',
@@ -11,11 +12,12 @@ import {Restaurant} from "../../restaurant/restaurant";
 })
 
 export class ShiftInfoComponent implements OnInit {
+  restaurant: Restaurant;
   shift: Shift;
   id: number;
-  restaurants: Array<Restaurant> = [];
 
   constructor(private shiftService: ShiftService,
+              private restaurantService: RestaurantService,
               private router: Router,
               private route: ActivatedRoute) { }
 
@@ -30,6 +32,9 @@ export class ShiftInfoComponent implements OnInit {
   }
 
 
+update(){
+  this.router.navigate(['/shifts/update/{id}']);
+}
 
 deleteShift(id: number){
     this.shiftService.deleteShift(id)
@@ -43,3 +48,4 @@ deleteShift(id: number){
     this.router.navigate(['/shifts']);
   }
 }
+

@@ -40,7 +40,7 @@ export class ShiftService {
   }
 
   updateShift(id: number, value: any): Promise<any>{
-    return this.http.put(this.shiftUrl+"/"+id, value).toPromise()
+    return this.http.put(this.shiftUrl+"/info/"+id, value).toPromise()
       .then(this.handleSuccess).catch(this.handleError);
   }
 

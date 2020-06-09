@@ -1,8 +1,10 @@
-<h2>Workplace Details</h2>
+<h2>Shift Details</h2>
 
 <hr/>
 <div *ngIf="shift">
-
+  <div>
+    <label><b>Workplace:</b></label>{{shift.restaurant.name}}
+  </div>
   <div>
     <label><b>DATE: </b></label> {{shift.dateOfShift}}
   </div>
@@ -18,7 +20,6 @@
   <div>
     <label><b>FOOD SALES: </b></label> {{shift.foodSales}}
   </div>
-
 </div>
 
 <br>

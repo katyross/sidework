@@ -30,7 +30,7 @@ export class ShiftListComponent implements OnInit {
   }
 
   getShift(id: number) {
-    this.router.navigate(['/shifts/info', id]);
+    this.router.navigate(['/shifts/info/', id]);
   }
 }
 

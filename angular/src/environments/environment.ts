@@ -4,6 +4,8 @@
 
 export const environment = {
   production: false,
+  SHIFT_ENDPOINT: 'http://localhost:8080/shifts',
+  RESTAURANT_ENDPOINT: 'http://localhost:8080/restaurants'
 };
 
 /*

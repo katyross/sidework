@@ -1,21 +1,9 @@
 <h2>Update Shift Details</h2>
 
 <hr/>
-<form (ngSubmit)="onSubmit()" #updateShift="ngForm">
+<form #editShift="ngForm" (ngSubmit)="updateShift(shift.id,editShift.value)">
 <div *ngIf="shift">
 
-  <div class = "form-group">
-    <label>Select Workplace:</label><br>
-    <select required [(ngModel)]="shift.restaurant"
-            name = "restaurant"
-            id="restaurant"
-            value = "{{shift.restaurant?.name}}">
-      <option *ngFor="let aRestaurant of restaurantList"
-              text="{{aRestaurant.name}}"
-              [ngValue]="aRestaurant">
-      </option>
-    </select>
-  </div>
 
   <div class="form-group">
     <label><b>DATE: </b></label>
@@ -65,6 +53,27 @@
            id="foodSales"
            required [(ngModel)]="shift.foodSales"
            name="ccTips">
+  </div>
+
+    <div class="form-group">
+      <label> Current Workplace Name:</label>
+      <div class="input-group">
+        <input type="text"  name="id" value="{{shift.restaurant?.name}}"
+               readonly>
+      </div>
+    </div>
+
+
+    <div>
+    <label>Select Workplace:</label><br>
+    <select name = "restaurant"
+            class = 'form-control'
+            id = 'restaurant'
+            required [(ngModel)]="shift.restaurant">
+      <option *ngFor="let aRestaurant of restaurantList"
+              [ngValue]="aRestaurant"> {{aRestaurant.name}}
+      </option>
+    </select>
   </div>
   <button type="submit" class="btn btn-success">Submit</button>
 </div>

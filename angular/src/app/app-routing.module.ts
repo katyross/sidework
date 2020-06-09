@@ -9,19 +9,21 @@ import {ShiftFormComponent} from "./shift/shift-form/shift-form.component";
 import {RestaurantUpdateComponent} from "./restaurant/restaurant-update/restaurant-update.component";
 import {ShiftUpdateComponent} from "./shift/shift-update/shift-update.component";
 import {ShiftInfoComponent} from "./shift/shift-info/shift-info.component";
+import {AppRoutes} from "./app-routes";
 
 const routes: Routes = [
   //restaurants
   //{ path: '', redirectTo: 'restaurants', pathMatch: 'full' },
-  { path: 'restaurants', component: RestaurantListComponent },
+  { path: AppRoutes.restaurants, component: RestaurantListComponent },
   { path: 'addWork', component: CreateRestaurantComponent },
-  { path: 'restaurants/info/:id', component: RestaurantInfoComponent },
-  { path: 'restaurants/update/:id', component: RestaurantUpdateComponent},
+  { path: AppRoutes.restaurants + AppRoutes.info, component: RestaurantInfoComponent },
+  { path: AppRoutes.restaurants + AppRoutes.update, component: RestaurantUpdateComponent},
   //shifts
-  { path: 'shifts', component: ShiftListComponent},
-  { path: 'shifts/addShift', component: ShiftFormComponent},
-  { path: 'shifts/info/:id', component: ShiftInfoComponent},
-  { path: 'shifts/update/:id', component: ShiftUpdateComponent}
+  { path: AppRoutes.shifts, component: ShiftListComponent},
+  { path: AppRoutes.shifts + '/addShift', component: ShiftFormComponent},
+  { path: AppRoutes.shifts + AppRoutes.info, component: ShiftInfoComponent},
+  { path: AppRoutes.shifts + AppRoutes.update, component: ShiftUpdateComponent}
+
 ];
 
 @NgModule({

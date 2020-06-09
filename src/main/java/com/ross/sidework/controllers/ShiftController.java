@@ -5,6 +5,8 @@ import com.ross.sidework.data.ShiftRepository;
 import com.ross.sidework.models.Restaurant;
 import com.ross.sidework.models.Shift;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -59,19 +61,23 @@ public class ShiftController {
         }
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping(value = "/update/{id}")
     public void updateShift(@PathVariable(value="id") int id,
-                     @Valid @RequestBody Shift shiftInfo){
-        Optional optShift = shiftRepository.findById(id);
+                      @RequestBody Shift shiftInfo){
+
         Optional optRestaurant = restaurantRepository.findById(shiftInfo.getRestaurant().getId());
         Restaurant restaurant = (Restaurant) optRestaurant.get();
+        shiftInfo.setRestaurant(restaurant);
+        Optional optShift = shiftRepository.findById(id);
         Shift shift = (Shift) optShift.get();
-                shift.setRestaurant(restaurant);
+
+                shift.setRestaurant(shiftInfo.getRestaurant());
                 shift.setBarSales(shiftInfo.getBarSales());
                 shift.setCashTips(shiftInfo.getCashTips());
                 shift.setCcTips(shiftInfo.getCcTips());
                 shift.setFoodSales(shiftInfo.getFoodSales());
                 shift.setRestaurant(shiftInfo.getRestaurant());
+
            shiftRepository.save(shift);
     }
 }

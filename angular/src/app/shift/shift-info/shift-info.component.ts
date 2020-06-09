@@ -13,7 +13,7 @@ import {RestaurantService} from "../../restaurant/restaurant.service";
 
 export class ShiftInfoComponent implements OnInit {
   restaurant: Restaurant;
-  shift: Shift;
+  shift: Shift = new Shift();
   id: number;
 
   constructor(private shiftService: ShiftService,
@@ -22,7 +22,9 @@ export class ShiftInfoComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.shift = new Shift();
+    this.getShiftbyId();
+  }
+  getShiftbyId(){
     this.id = this.route.snapshot.params["id"];
     this.shiftService.getShift(this.id)
       .then(successResponse =>{
@@ -30,10 +32,6 @@ export class ShiftInfoComponent implements OnInit {
       })
       .catch();
   }
-
-// setRestaurant(id: number, shift: Shift){
-//     this.shift.restaurant = this.restaurantService.getRestaurant()
-// }
 
 update(){
   this.router.navigate(['/shifts/update/'+ this.id]);

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Shift} from "./shift";
+import {ApiConstants} from "../api-constants";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -8,40 +9,56 @@ const httpOptions = {
   })
 };
 
-@Injectable()
-export class ShiftService {
-   shiftUrl: string;
+@Injectable({
+  providedIn: "root"
+})
 
-  constructor(private http: HttpClient) {
-    this.shiftUrl = 'http://localhost:8080/shifts'
-  }
+export class ShiftService {
+
+  constructor(private http: HttpClient) {}
 
   saveShift(shift: Shift){
-     return this.http.post(this.shiftUrl,shift, httpOptions).toPromise().then(this.handleSuccess).catch(this.handleError);
+     return this.http
+       .post(ApiConstants.SHIFT_ENDPOINT,shift,httpOptions)
+       .toPromise()
+       .then(this.handleSuccess).catch(this.handleError);
   }
+
   getAllRestaurants(){
-    return this.http.get('http://localhost:8080/restaurants').toPromise().then
-    (this.handleSuccess).catch(this.handleError);
+    return this.http
+      .get(ApiConstants.RESTAURANT_ENDPOINT)
+      .toPromise()
+      .then(this.handleSuccess)
+      .catch(this.handleError);
   }
 
   deleteShift(id): Promise<any>{
-    return this.http.delete(this.shiftUrl +"/info/"+id).toPromise()
-      .then(this.handleSuccess).catch(this.handleError);
+    return this.http
+      .delete(ApiConstants.SHIFT_ENDPOINT +"/info/"+id)
+      .toPromise()
+      .then(this.handleSuccess)
+      .catch(this.handleError);
   }
 
   getShiftList(){
-    return this.http.get(this.shiftUrl).toPromise()
+    return this.http.get(ApiConstants.SHIFT_ENDPOINT).toPromise()
       .then(this.handleSuccess).catch(this.handleError);
   }
 
-  getShift(id: number){
-    return this.http.get(this.shiftUrl+"/info/"+id).toPromise()
-      .then(this.handleSuccess).catch(this.handleError);
+  getShift(id): Promise<any>{
+    return this.http
+      .get(ApiConstants.SHIFT_ENDPOINT + "/info/" +id)
+      .toPromise()
+      .then(this.handleSuccess)
+      .catch(this.handleError);
   }
 
-  updateShift(id: number, value: any): Promise<any>{
-    return this.http.put(this.shiftUrl+"/info/"+id, value).toPromise()
-      .then(this.handleSuccess).catch(this.handleError);
+  updateShift(id, shift: Shift): Promise<any>{
+    return this.http
+      .put( ApiConstants.SHIFT_ENDPOINT +"/update/"+id, shift)
+      .toPromise()
+      .then(this.handleSuccess)
+      .catch(this.handleError);
   }
 
 

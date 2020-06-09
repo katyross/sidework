@@ -31,7 +31,7 @@ public class RestaurantController {
 
     // list one restaurants details
     @GetMapping("/info/{id}")
-    public Restaurant getRestaurantbyId(@PathVariable(value = "id") int id) {
+    public Restaurant getRestaurantById(@PathVariable(value = "id") int id) {
         Optional optRestaurant = restaurantRepository.findById(id);
             Restaurant restaurant = (Restaurant) optRestaurant.get();
             return restaurant;

@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/shifts")
+@CrossOrigin( origins = { "http://localhost:4200"})
 public class ShiftController {
     @Autowired
     private ShiftRepository shiftRepository;
@@ -39,14 +39,14 @@ public class ShiftController {
 
     // list one shift's details
     @GetMapping("/info/{id}")
-    public Shift getShiftbyId(@PathVariable(value = "id") int id) {
+    public Shift getShiftById(@PathVariable(value = "id") int id) {
         Optional optShift = shiftRepository.findById(id);
         Shift shift = (Shift) optShift.get();
         return shift;
     }
 
     // delete one shift
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/info/{id}")
     void deleteShift(@PathVariable(value="id") int id){
         Optional optShift = shiftRepository.findById(id);
         if (optShift.isPresent()){

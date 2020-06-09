@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Shift} from "./shift";
 
-@Injectable(
-)
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+};
+
+@Injectable()
 export class ShiftService {
    shiftUrl: string;
 
@@ -12,7 +17,7 @@ export class ShiftService {
   }
 
   saveShift(shift: Shift){
-     return this.http.post(this.shiftUrl,shift).toPromise().then(this.handleSuccess).catch(this.handleError);
+     return this.http.post(this.shiftUrl,shift, httpOptions).toPromise().then(this.handleSuccess).catch(this.handleError);
   }
   getAllRestaurants(){
     return this.http.get('http://localhost:8080/restaurants').toPromise().then
@@ -20,7 +25,7 @@ export class ShiftService {
   }
 
   deleteShift(id): Promise<any>{
-    return this.http.delete(this.shiftUrl +"/"+id).toPromise()
+    return this.http.delete(this.shiftUrl +"/info/"+id).toPromise()
       .then(this.handleSuccess).catch(this.handleError);
   }
 
@@ -30,7 +35,7 @@ export class ShiftService {
   }
 
   getShift(id: number){
-    return this.http.get(this.shiftUrl+"/"+id).toPromise()
+    return this.http.get(this.shiftUrl+"/info/"+id).toPromise()
       .then(this.handleSuccess).catch(this.handleError);
   }
 

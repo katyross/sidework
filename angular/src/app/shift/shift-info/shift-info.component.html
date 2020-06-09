@@ -3,7 +3,7 @@
 <hr/>
 <div *ngIf="shift">
   <div>
-    <label><b>Workplace:</b></label>{{shift.restaurant.name}}
+    <label><b>Workplace:</b></label>{{shift.restaurant?.name}}
   </div>
   <div>
     <label><b>DATE: </b></label> {{shift.dateOfShift}}

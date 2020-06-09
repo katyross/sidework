@@ -9,7 +9,7 @@
     <select required [(ngModel)]="shift.restaurant"
             name = "restaurant"
             id="restaurant"
-            value = "{{shift.restaurant.name}}">
+            value = "{{shift.restaurant?.name}}">
       <option *ngFor="let aRestaurant of restaurantList"
               text="{{aRestaurant.name}}"
               [ngValue]="aRestaurant">

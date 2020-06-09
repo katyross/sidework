@@ -31,9 +31,12 @@ export class ShiftInfoComponent implements OnInit {
       .catch();
   }
 
+// setRestaurant(id: number, shift: Shift){
+//     this.shift.restaurant = this.restaurantService.getRestaurant()
+// }
 
 update(){
-  this.router.navigate(['/shifts/update/{id}']);
+  this.router.navigate(['/shifts/update/'+ this.id]);
 }
 
 deleteShift(id: number){

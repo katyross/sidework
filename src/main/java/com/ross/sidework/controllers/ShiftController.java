@@ -60,7 +60,7 @@ public class ShiftController {
     }
 
     @PutMapping("/update/{id}")
-    public Shift updateShift(@PathVariable(value="id") int id,
+    public void updateShift(@PathVariable(value="id") int id,
                      @Valid @RequestBody Shift shiftInfo){
         Optional optShift = shiftRepository.findById(id);
         Optional optRestaurant = restaurantRepository.findById(shiftInfo.getRestaurant().getId());
@@ -72,8 +72,6 @@ public class ShiftController {
                 shift.setCcTips(shiftInfo.getCcTips());
                 shift.setFoodSales(shiftInfo.getFoodSales());
                 shift.setRestaurant(shiftInfo.getRestaurant());
-            return shift;
-
-
+           shiftRepository.save(shift);
     }
 }

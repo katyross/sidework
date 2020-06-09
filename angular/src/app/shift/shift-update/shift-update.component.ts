@@ -18,20 +18,18 @@ export class ShiftUpdateComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router,
               private shiftService: ShiftService,) {
-    this.restaurantList = [];
   }
 
   ngOnInit() {
+    this.shift = new Shift();
+    this.id = this.route.snapshot.params["id"];
     this.getRestaurants();
-    this.getShift();
-  }
-
-  getShift(){
     this.shiftService.getShift(this.id)
       .then(successResponse => {
         this.shift = successResponse;
-      })
+      }).catch();
   }
+
 
   updateShift(id: number, shift: Shift){
     this.shiftService.updateShift(this.id, this.shift)

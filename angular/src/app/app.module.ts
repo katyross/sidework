@@ -14,6 +14,8 @@ import { ShiftFormComponent } from './shift/shift-form/shift-form.component';
 import { RestaurantUpdateComponent } from './restaurant/restaurant-update/restaurant-update.component';
 import {ShiftInfoComponent} from "./shift/shift-info/shift-info.component";
 import {ShiftUpdateComponent} from "./shift/shift-update/shift-update.component";
+import { IncomeComponent } from './income/income-list/income.component';
+import { IncomeListComponent } from './income/income-list/income-list.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import {ShiftUpdateComponent} from "./shift/shift-update/shift-update.component"
     RestaurantUpdateComponent,
     ShiftInfoComponent,
     ShiftUpdateComponent,
+    IncomeComponent,
+    IncomeListComponent,
   ],
   imports: [
     BrowserModule,

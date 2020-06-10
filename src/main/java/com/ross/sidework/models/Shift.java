@@ -49,7 +49,7 @@ public @Data class Shift  {
         this.restaurant = restaurant;
     }
 
-    protected double getTipOutDeductions(){
+    public double getTipOutDeductions(){
         // calculate amount to be removed from tips based on tipout rate for sales based on if they are bar sales or food sales
         double foodTipOut = this.foodSales * this.restaurant.getFoodTipOutPCT();
         double barTipOut = (this.barSales * this.restaurant.getFoodTipOutPCT()) +
@@ -59,7 +59,7 @@ public @Data class Shift  {
         return totalTipOut;
     }
 
-    protected double getTakeHomePay(){
+    public double getTakeHomePay(){
        return  this.cashTips + this.ccTips + this.getTipOutDeductions();
     }
    }

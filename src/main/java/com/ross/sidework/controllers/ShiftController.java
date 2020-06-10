@@ -20,7 +20,7 @@ public class ShiftController {
     @Autowired
     private ShiftRepository shiftRepository;
     @Autowired
-    RestaurantRepository restaurantRepository;
+    private RestaurantRepository restaurantRepository;
 
     // list existing shifts
     @GetMapping

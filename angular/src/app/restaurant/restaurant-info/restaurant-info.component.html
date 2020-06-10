@@ -14,9 +14,11 @@
   <div>
     <label><b>Hourly Rate: </b></label> {{restaurant.hourlyRate}}
   </div>
-</div>
+
 
 <br>
 <br>
 <button (click)="list()" class="btn btn-primary">Back to Restaurant List</button><br>
-<button (click)="update()" class="btn btn-link">Update</button><br>
+<button (click)="update()" class="btn btn-link">Update</button>
+<button (click)="deleteRestaurant(restaurant.id)" class="btn btn-danger">Delete</button>
+</div>

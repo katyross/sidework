@@ -10,31 +10,32 @@ import {RestaurantService} from "../restaurant.service";
 })
 export class RestaurantUpdateComponent implements OnInit {
   id: number;
-  restaurant: object;
+  restaurant:Restaurant = new Restaurant();
 
   constructor(private route: ActivatedRoute, private router: Router,
               private restaurantService: RestaurantService) { }
 
   ngOnInit() {
-    this.restaurant = new Restaurant();
+    this.getRestaurant();
+  }
+
+  getRestaurant(){
     this.id = this.route.snapshot.params['id'];
-
     this.restaurantService.getRestaurant(this.id)
-      .subscribe(data => {
-        console.log(data)
-        this.restaurant = data;
-      });
+      .then(successResponse => {
+        this.restaurant = successResponse;
+      }).catch();
   }
 
-  updateRestaurant(){
+  updateRestaurant(id:number, restaurant: Restaurant){
     this.restaurantService.updateRestaurant(this.id, this.restaurant)
-      .subscribe(data => console.log(data));
-    this.list();
+      .then(successResponse =>{
+        this.list();
+      }).catch();
+
   }
 
-  onSubmit(){
-    this.updateRestaurant();
-  }
+
 
   list(){
     this.router.navigate(['/restaurants/info/'+ this.id]);

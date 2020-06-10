@@ -13,9 +13,7 @@
       <tbody>
       <tr *ngFor="let aRestaurant of restaurant | async">
         <td>{{aRestaurant.name}}</td>
-        <td><button (click)="deleteRestaurant(aRestaurant.id)" class="btn btn-danger">Delete</button>
           <button (click)="restaurantDetails(aRestaurant.id)" class="btn btn-info" style="margin-left: 10px">Info</button>
-        </td>
       </tr>
       </tbody>
     </table>

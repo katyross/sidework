@@ -1,6 +1,6 @@
 <h3>Update Workplace:</h3>
 <div style="width: 300px;">
-  <form (ngSubmit)="onSubmit()" #updateRestaurant="ngForm">
+  <form (ngSubmit)="updateRestaurant(restaurant.id,updateForm.value)" #updateForm="ngForm">
     <div *ngIf="restaurant">
     <div class="form-group">
       <label for="name">Restaurant Name</label>

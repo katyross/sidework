@@ -23,14 +23,6 @@ reloadData(){
     this.restaurant = this.restaurantService.getRestaurantList();
 }
 
-deleteRestaurant(id: number) {
-  this.restaurantService.deleteRestaurant(id)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.reloadData();
-      });
-    }
 
     restaurantDetails(id:number){
     this.router.navigate(['/restaurants/info', id]);

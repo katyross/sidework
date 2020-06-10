@@ -38,7 +38,7 @@ public class RestaurantController {
     }
      //update single restaurant
     @PutMapping("/update/{id}")
-    public Restaurant updateRestaurant(@PathVariable(value = "id") int id,
+    public void updateRestaurant(@PathVariable(value = "id") int id,
                                        @Valid @RequestBody Restaurant restaurantInfo){
         //find restaurant
         Optional optRestaurant = restaurantRepository.findById(id);
@@ -49,10 +49,10 @@ public class RestaurantController {
         restaurant.setBarTipOutPCT(restaurantInfo.getBarTipOutPCT());
         restaurant.setHourlyRate(restaurantInfo.getHourlyRate());
         // return updated restaurant
-        return restaurant;
+        restaurantRepository.save(restaurant);
     }
     // delete one restaurant
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/info/{id}")
     void deleteRestaurant(@PathVariable(value="id") int id){
          Optional optRestaurant = restaurantRepository.findById(id);
         if (optRestaurant.isPresent()){

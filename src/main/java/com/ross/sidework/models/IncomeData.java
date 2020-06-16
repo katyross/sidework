@@ -12,7 +12,7 @@ public class IncomeData {
 
     // determine if shift is within existing PayPeriod
     public static boolean validatePayPeriod(Shift shift, PayPeriod payPeriod){
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyy");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         //in controller class, pay-period parameter will be determined by iterating through pay-period repository
         LocalDate shiftDate, payStart, payEnd;
         // determine date of shift, change to LocalDate type

@@ -1,0 +1,35 @@
+import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {PayPeriod} from "./payperiod";
+import {ApiConstants} from "../api-constants";
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+};
+
+@Injectable({
+  providedIn: 'root'
+})
+
+export class PayPeriodService {
+
+  constructor(private http: HttpClient) { }
+
+  savePayPeriod(payPeriod: PayPeriod){
+    return this.http
+      .post(ApiConstants.PAY_ENDPOINT, payPeriod, httpOptions)
+      .toPromise()
+      .then(this.handleSuccess).catch(this.handleError);
+  }
+  getPayPeriodList(){
+    return this.http.get(ApiConstants.PAY_ENDPOINT)
+      .toPromise()
+      .then(this.handleSuccess)
+      .catch(this.handleError);
+  }
+
+  private handleSuccess(successResponse): Promise<any>{ return Promise.resolve(successResponse);}
+  private handleError(errorResponse):Promise<any>{return Promise.resolve(errorResponse);}
+}

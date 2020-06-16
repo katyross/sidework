@@ -11,6 +11,7 @@ import java.util.List;
 @RequestMapping("/pay-period")
 @CrossOrigin(  origins = { "http://localhost:4200"})
 public class PayPeriodController {
+
     @Autowired
     private PayPeriodRepository payPeriodRepository;
 
@@ -19,8 +20,8 @@ public class PayPeriodController {
         return (List<PayPeriod>) payPeriodRepository.findAll();
     }
 
-    @PostMapping("/add")
-    public void addPayPeriod(@RequestBody PayPeriod pP){
+    @PostMapping
+     void addPayPeriod(@RequestBody PayPeriod pP){
         payPeriodRepository.save(pP);
     }
 }

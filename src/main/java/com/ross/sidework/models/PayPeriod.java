@@ -1,7 +1,6 @@
 package com.ross.sidework.models;
 
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +14,7 @@ class PayPeriod {
     @GeneratedValue
     private int id;
 
-    @DateTimeFormat(pattern = "dd/MM/yyy")
+    //@DateTimeFormat(pattern = "dd/MM/yyyy")
     private String startPayPeriod, endPayPeriod;
 
     public PayPeriod() { }

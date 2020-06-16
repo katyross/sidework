@@ -38,18 +38,6 @@ public class ShiftTest {
         assertEquals(.025,testShift.getRestaurant().getFoodTipOutPCT(),.001);
     }
 
-    @Before
-    @Test
-    public void calculatesTotalTipOutDeductions(){
-        assertEquals(-26.55,testShift.getTipOutDeductions(),.001);
-    }
-
-    @Before
-    @Test
-    public void calculatesTakeHomePay(){
-        assertEquals(81.12, testShift.getTakeHomePay(),.001);
-    }
-
 
     @Test
     public void shouldHaveNoViolations(){

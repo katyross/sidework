@@ -12,7 +12,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-//@EqualsAndHashCode(callSuper = true)
 public @Data class Shift  {
     @Id
     @GeneratedValue
@@ -32,7 +31,6 @@ public @Data class Shift  {
     @NotBlank(message = "enter date of shift in dd/mm/yyyy format")
     private String dateOfShift;
 
-
     @ManyToOne
     private Restaurant restaurant;
 
@@ -49,17 +47,4 @@ public @Data class Shift  {
         this.restaurant = restaurant;
     }
 
-    public double getTipOutDeductions(){
-        // calculate amount to be removed from tips based on tipout rate for sales based on if they are bar sales or food sales
-        double foodTipOut = this.foodSales * this.restaurant.getFoodTipOutPCT();
-        double barTipOut = (this.barSales * this.restaurant.getFoodTipOutPCT()) +
-                (this.barSales * this.restaurant.getBarTipOutPCT());
-        // add amounts together, multiply by one to subtract from tips
-        double totalTipOut = (foodTipOut + barTipOut) * -1;
-        return totalTipOut;
-    }
-
-    public double getTakeHomePay(){
-       return  this.cashTips + this.ccTips + this.getTipOutDeductions();
-    }
    }

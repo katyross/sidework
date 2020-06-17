@@ -1,1 +1,22 @@
-<p>payperiod-list works!</p>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Pay Periods:</h2>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Start</th>
+        <th>End</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let aPP of payPeriodList ">
+        <td>{{aPP.startPayPeriod}}</td>
+        <td>{{aPP.endPayPeriod}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <button (click)="add()" class="btn btn-info" style="margin-left: 10px">Add New Pay Period</button>
+</div>

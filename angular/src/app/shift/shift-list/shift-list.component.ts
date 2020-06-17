@@ -12,8 +12,7 @@ export class ShiftListComponent implements OnInit {
   shiftList: Array<Shift[]> =[];
 
   constructor(private shiftService: ShiftService,
-              private router: Router) {
-  }
+              private router: Router) {}
 
   ngOnInit() {
     this.getAllShifts();

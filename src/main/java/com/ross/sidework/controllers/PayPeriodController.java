@@ -5,6 +5,9 @@ import com.ross.sidework.models.PayPeriod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -17,7 +20,9 @@ public class PayPeriodController {
 
     @GetMapping
     public List<PayPeriod> getAllPayPeriods() {
-        return (List<PayPeriod>) payPeriodRepository.findAll();
+        List<PayPeriod> getList = (List<PayPeriod>) payPeriodRepository.findAll();
+        getList.sort((PayPeriod o1, PayPeriod o2) -> o2.getId() - o1.getId() ); // sort by descending order of pay period creation
+        return getList;
     }
 
     @PostMapping

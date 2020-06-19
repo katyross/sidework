@@ -1,32 +1,34 @@
 package com.ross.sidework.models;
 
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class IncomeData {
 
+    public static double getHoursWorked(Shift shift) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy hh:mm a");
+        long hoursWorked;
 
-    // determine if shift is within existing PayPeriod
-    public static boolean validatePayPeriod(Shift shift, PayPeriod payPeriod){
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        //in controller class, pay-period parameter will be determined by iterating through pay-period repository
-        LocalDate shiftDate, payStart, payEnd;
-        // determine date of shift, change to LocalDate type
-        shiftDate = LocalDate.parse(shift.getDateOfShift(),format);
-        payStart = LocalDate.parse(payPeriod.getStartPayPeriod(),format);
-        payEnd = LocalDate.parse(payPeriod.getEndPayPeriod(),format);
-        // determine if date is within existing pay period
-        if (shiftDate.isBefore(payEnd)
-                && shiftDate.isAfter(payStart)) {
-            return true;
-        } else {
-            return false;
+        Date inTime = format.parse(shift.getInTime());
+        Date outTime = format.parse(shift.getOutTime());
+
+
+        hoursWorked = outTime.getTime() - inTime.getTime();
+        long days = TimeUnit.MILLISECONDS.toDays(hoursWorked);
+        long hrs = TimeUnit.MILLISECONDS.toHours(hoursWorked) % 24;
+        long min = TimeUnit.MILLISECONDS.toMinutes(hoursWorked) % 60;
+
+        double findMinPCT = (double)min/60;
+        double round = Math.round(findMinPCT * 100.0)/100.0;
+        if (days > 0) {
+            hrs += 24 * days;
+            days = 0;
         }
+        // returns value that may easily be multiplied by hourly rate to get hourly pay
+        return days+hrs+round;
     }
 
     // calculates tip-out deductions based on restaurant tip-out percentages and shift bar/food sales
@@ -45,16 +47,6 @@ public class IncomeData {
         double cashTips = shift.getCashTips();
         double ccTips = shift.getCcTips();
         return  cashTips + ccTips + getTipOutDeductions(shift);
-    }
-
-    // calculates total income of shifts from given income list
-    public static double getTotalIncome(Income income) {
-        double totalIncome = 0;
-        List<Shift> shifts = income.getShifts();
-        for (Shift shift : shifts) {
-            totalIncome += getTakeHomePay(shift);
-        }
-        return totalIncome;
     }
 
 }

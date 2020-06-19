@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 public class ShiftTest {
 
     private  Restaurant testRestaurant = new Restaurant("3 Monkeys", .025, .035, 5.46);
-    private  Shift testShift = new Shift(234.00, 345.00, 94.67, 13.00, "21/01/2022", testRestaurant);
+    private  Shift testShift = new Shift(234.00, 345.00, 94.67, 13.00, "07/01/2022","21/01/2022 01:45:PM","21/01/2022 11:52:PM", testRestaurant);
     private static ValidatorFactory validatorFactory= Validation.buildDefaultValidatorFactory();;
     private static Validator validator= validatorFactory.getValidator();;
 
@@ -41,7 +41,7 @@ public class ShiftTest {
 
     @Test
     public void shouldHaveNoViolations(){
-        Shift aTestShift = new Shift(234.00, 345.00, 94.67, 13.00, "21/01/2022", testRestaurant);
+        Shift aTestShift = new Shift(234.00, 345.00, 94.67, 13.00,"07/01/2022","21/01/2022 01:45:PM","21/01/2022 11:52:PM", testRestaurant);
         Set<ConstraintViolation<Shift>> violations = validator.validate(aTestShift);
         assertTrue(violations.isEmpty());
     }
@@ -49,7 +49,7 @@ public class ShiftTest {
     @Test
     public void detectsInvalidFoodSales() {
         // too high of foodSales input
-        Shift wrongTestShift = new Shift(22341234324134.00, 345.00, 94.67, 13.00, "21/01/2022", testRestaurant);
+        Shift wrongTestShift = new Shift(22341234324134.00, 345.00, 94.67, 13.00, "07/01/2022","21/01/2022 01:45:PM","21/01/2022 11:52:PM", testRestaurant);
         Set<ConstraintViolation<Shift>> violations = validator.validate(wrongTestShift);
         assertEquals(violations.size(),1,.00);
 

@@ -1,11 +1,12 @@
 package com.ross.sidework.models;
 
-import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -28,8 +29,12 @@ public @Data class Shift  {
     private double ccTips, cashTips; // credit card
 
     @DateTimeFormat(pattern = "dd/mm/yyyy")
-    @NotBlank(message = "enter date of shift in dd/mm/yyyy format")
-    private String dateOfShift;
+    @NotBlank(message = "enter payDay in dd/mm/yyyy format")
+    private String payDay;
+
+    @DateTimeFormat(pattern = "dd/mm/yyyy hh:mm:a")
+    @NotBlank(message = "enter in dd/mm/yyyy hh:mm a format")
+    private String inTime,outTime;
 
     @ManyToOne
     private Restaurant restaurant;
@@ -38,13 +43,17 @@ public @Data class Shift  {
 
 
     public Shift( double foodSales, double barSales, double ccTips,
-                 double cashTips, String dateOfShift, Restaurant restaurant){
+                 double cashTips, String payDay,
+                  String inTime, String outTime, Restaurant restaurant){
         this.foodSales = foodSales;
         this.barSales = barSales;
         this.ccTips = ccTips;
         this.cashTips = cashTips;
-        this.dateOfShift = dateOfShift;
+        this.payDay = payDay;
+        this.inTime = inTime;
+        this.outTime = outTime;
         this.restaurant = restaurant;
     }
+
 
    }

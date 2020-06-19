@@ -15,9 +15,7 @@ import { RestaurantUpdateComponent } from './restaurant/restaurant-update/restau
 import {ShiftInfoComponent} from "./shift/shift-info/shift-info.component";
 import {ShiftUpdateComponent} from "./shift/shift-update/shift-update.component";
 import { IncomeListComponent } from './income/income-list/income-list.component';
-import { PayPeriodAddComponent } from './payperiod/payperiod-add/payperiod-add.component';
-import { PayPeriodListComponent } from './payperiod/payperiod-list/payperiod-list.component';
-import {PayPeriodService} from "./payperiod/payperiod.service";
+
 
 @NgModule({
   declarations: [
@@ -31,8 +29,7 @@ import {PayPeriodService} from "./payperiod/payperiod.service";
     ShiftInfoComponent,
     ShiftUpdateComponent,
     IncomeListComponent,
-    PayPeriodAddComponent,
-    PayPeriodListComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -43,7 +40,6 @@ import {PayPeriodService} from "./payperiod/payperiod.service";
   providers: [
     RestaurantService,
     ShiftService,
-    PayPeriodService
   ],
   bootstrap: [AppComponent]
 })

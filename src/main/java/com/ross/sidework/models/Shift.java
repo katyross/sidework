@@ -41,7 +41,6 @@ public @Data class Shift  {
 
     public Shift (){}
 
-
     public Shift( double foodSales, double barSales, double ccTips,
                  double cashTips, String payDay,
                   String inTime, String outTime, Restaurant restaurant){

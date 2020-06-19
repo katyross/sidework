@@ -31,6 +31,14 @@ public class IncomeData {
         return days+hrs+round;
     }
 
+    public static double getHourlyPay(Shift shift, double hoursWorked){
+
+        double hourlyPay = shift.getRestaurant().getHourlyRate() * hoursWorked;
+        double round = Math.round(hourlyPay * 100.0)/100.0;
+
+        return round;
+    }
+
     // calculates tip-out deductions based on restaurant tip-out percentages and shift bar/food sales
     public static double getTipOutDeductions(Shift shift){
         // calculate amount to be removed from tips based on tip-out rate for sales based on if they are bar sales or food sales

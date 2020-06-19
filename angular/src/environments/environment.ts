@@ -7,6 +7,7 @@ export const environment = {
   SHIFT_ENDPOINT: 'http://localhost:8080/shifts',
   RESTAURANT_ENDPOINT: 'http://localhost:8080/restaurants',
   PAY_ENDPOINT: 'http://localhost:8080/pay-period',
+  INCOME_ENDPOINT: 'http://localhost:8080/income',
 };
 
 /*

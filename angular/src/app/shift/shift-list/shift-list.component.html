@@ -13,7 +13,7 @@
       <tbody>
       <tr *ngFor="let aShift of shiftList ">
         <td>{{aShift.restaurant?.name}}</td>
-        <td>{{aShift.dateOfShift}}</td>
+        <td>{{aShift.inTime.substring(0,10)}}</td>
           <button (click)="getShift(aShift.id)" class="btn btn-info" style="margin-left: 10px">Info</button>
       </tr>
       </tbody>

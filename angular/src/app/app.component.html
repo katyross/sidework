@@ -1,13 +1,24 @@
-<nav class="navbar">
-  <!-- Links -->
-      <a routerLink="restaurants" class="nav-link" routerLinkActive="active">Restaurant List</a>
+<ul class = "nav nav-pills">
+  <li class="nav-item">
+    <a routerLink="restaurants" class="nav-link" routerLinkActive="active">Restaurant List</a>
+  </li>
+  <li>
+    <a routerLink="shifts" class="dropdown-item" routerLinkActive="active">All Shifts</a>
+  </li>
+  <li>
+    <a routerLink="shifts/addShift" class="dropdown-item" routerLinkActive="active">Add Shift</a>
+  </li>
+  <li>
+    <a routerLink="addWork" class="nav-link" routerLinkActive="active">Add Restaurant</a>
+  </li>
+  <li>
+    <a routerLink="income" class="nav-link" routerLinkActive="active">Income</a>
+  </li>
+</ul>
 
-      <a routerLink="addWork" class="nav-link" routerLinkActive="active">Add Restaurant</a>
 
-        <a routerLink="shifts" class="nav-link" routerLinkActive="active">Shift List</a>
 
-        <a routerLink="shifts/addShift" class="nav-link" routerLinkActive="active">Add Shift</a>
-</nav>
+
 <div class="container">
   <br>
   <h2 style="text-align: center;">{{title}}</h2>
@@ -17,12 +28,5 @@
       <router-outlet></router-outlet>
     </div>
   </div>
+
 </div>
-
-<footer class="footer">
-  <div class="container">
-    <br>
-    <span>by katy ross</span>
-  </div>
-</footer>
-

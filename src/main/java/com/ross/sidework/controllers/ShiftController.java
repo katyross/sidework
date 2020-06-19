@@ -37,7 +37,6 @@ public class ShiftController {
             shift.setRestaurant(restaurant);
             shiftRepository.save(shift);
         }
-
     }
 
     // list one shift's details
@@ -70,14 +69,15 @@ public class ShiftController {
         shiftInfo.setRestaurant(restaurant);
         Optional optShift = shiftRepository.findById(id);
         Shift shift = (Shift) optShift.get();
-
                 shift.setRestaurant(shiftInfo.getRestaurant());
                 shift.setBarSales(shiftInfo.getBarSales());
+                shift.setInTime(shiftInfo.getInTime());
+                shift.setOutTime(shiftInfo.getOutTime());
+                shift.setPayDay(shiftInfo.getPayDay());
                 shift.setCashTips(shiftInfo.getCashTips());
                 shift.setCcTips(shiftInfo.getCcTips());
                 shift.setFoodSales(shiftInfo.getFoodSales());
                 shift.setRestaurant(shiftInfo.getRestaurant());
-
            shiftRepository.save(shift);
     }
 }

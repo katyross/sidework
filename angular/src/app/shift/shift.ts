@@ -7,7 +7,9 @@ export class Shift {
   barSales: number;
   ccTips: number;
   cashTips: number;
-  dateOfShift: string;
+  payDay: string;
+  inTime: string;
+  outTime: string;
   restaurant: Restaurant;
 }
 

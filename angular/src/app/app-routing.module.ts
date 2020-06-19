@@ -10,6 +10,7 @@ import {RestaurantUpdateComponent} from "./restaurant/restaurant-update/restaura
 import {ShiftUpdateComponent} from "./shift/shift-update/shift-update.component";
 import {ShiftInfoComponent} from "./shift/shift-info/shift-info.component";
 import {AppRoutes} from "./app-routes";
+import {IncomeListComponent} from "./income/income-list/income-list.component";
 
 const routes: Routes = [
   //restaurants
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: AppRoutes.shifts + '/addShift', component: ShiftFormComponent},
   { path: AppRoutes.shifts + AppRoutes.info, component: ShiftInfoComponent},
   { path: AppRoutes.shifts + AppRoutes.update, component: ShiftUpdateComponent},
-
+ //income
+  {path: AppRoutes.income, component: IncomeListComponent},
 
 ];
 

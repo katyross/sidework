@@ -17,7 +17,7 @@ public class IncomeDataTest {
             "07/06/2020", "01/06/2020 01:45 PM","01/06/2020 11:52 PM", this.testRestaurant);
     @Test
     public void hourlyPayWorks() throws ParseException {
-        assertEquals(55.26,IncomeData.getHourlyPay(testShift,IncomeData.getHoursWorked(testShift)),.001);
+        assertEquals(55.26,IncomeData.getHourlyPay(testShift),.001);
     }
 
     @Test

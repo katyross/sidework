@@ -2,7 +2,9 @@ package com.ross.sidework.models;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -31,11 +33,9 @@ public class IncomeData {
         return days+hrs+round;
     }
 
-    public static double getHourlyPay(Shift shift, double hoursWorked){
-
-        double hourlyPay = shift.getRestaurant().getHourlyRate() * hoursWorked;
+    public static double getHourlyPay(Shift shift) throws ParseException {
+        double hourlyPay = shift.getRestaurant().getHourlyRate() * getHoursWorked(shift);
         double round = Math.round(hourlyPay * 100.0)/100.0;
-
         return round;
     }
 

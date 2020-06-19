@@ -1,9 +1,20 @@
 <h3>Add Shift:</h3>
 <div style="width: 300px;">
   <form (ngSubmit)="onSubmit(createShift.value)" #createShift="ngForm">
+
     <div class="form-group">
-      <label for="dateOfShift">Date of Shift</label>
-      <input type="text" class="form-control" id="dateOfShift" required [(ngModel)]="shift.dateOfShift" name="dateOfShift">
+      <label for="inTime">IN TIME:</label>
+      <input type="text" class="form-control" id="inTime" required [(ngModel)]="shift.inTime" name="inTime">
+    </div>
+
+    <div class="form-group">
+      <label for="outTime">OUT TIME: </label>
+      <input type="text" class="form-control" id="outTime" required [(ngModel)]="shift.outTime" name="outTime">
+    </div>
+
+    <div class="form-group">
+      <label for="payDay">PAY DAY:</label>
+      <input type="text" class="form-control" id="payDay" required [(ngModel)]="shift.payDay" name="payDay">
     </div>
 
     <div class="form-group">

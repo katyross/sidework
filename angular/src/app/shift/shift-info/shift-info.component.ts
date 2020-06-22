@@ -24,6 +24,7 @@ export class ShiftInfoComponent implements OnInit {
   ngOnInit() {
     this.getShiftbyId();
   }
+
   getShiftbyId(){
     this.id = this.route.snapshot.params["id"];
     this.shiftService.getShift(this.id)

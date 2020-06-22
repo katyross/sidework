@@ -20,6 +20,11 @@ public class IncomeController {
     @Autowired
     private  ShiftRepository shiftRepository;
 
+    @GetMapping("/payDay")
+    public ArrayList<String> getPayDays(){
+        List<Shift> allShifts = (List<Shift>) shiftRepository.findAll();
+        return IncomeData.getPayDays(allShifts);
+    }
 
     @GetMapping
     @ResponseBody
@@ -36,11 +41,13 @@ public class IncomeController {
                 tips += IncomeData.getTakeHomePay(shift);
                 tipOuts += IncomeData.getTipOutDeductions(shift);
             }
+            double roundHours = Math.round(hours * 100.0)/100.0;
+            double roundTipOuts = Math.round(tipOuts * 100.0)/100.0;
 
-            totalIncome.put("TOTAL HOURS:", hours);
+            totalIncome.put("TOTAL HOURS:", roundHours);
             totalIncome.put("TOTAL HOURLY:", hourly);
             totalIncome.put("TOTAL TIPS:", Math.round(tips * 100.0)/100.0);
-            totalIncome.put("TOTAL TIP-OUTS:", tipOuts);
+            totalIncome.put("TOTAL TIP-OUTS:", roundTipOuts);
             totalIncome.put("TOTAL TAKE-HOME:", Math.round((hourly+tips) * 100.0)/100.0);
 
             return totalIncome;

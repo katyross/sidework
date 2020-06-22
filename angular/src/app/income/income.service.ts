@@ -17,6 +17,14 @@ export class IncomeService {
       .catch(this.handleError);
   }
 
+  getPayDayList(){
+    return this.http
+      .get(ApiConstants.INCOME_ENDPOINT + "/payDay")
+      .toPromise()
+      .then(this.handleSuccess)
+      .catch(this.handleError);
+  }
+
   private handleSuccess(successResponse): Promise<any>{ return Promise.resolve(successResponse);}
   private handleError(errorResponse):Promise<any>{return Promise.resolve(errorResponse);}
 }

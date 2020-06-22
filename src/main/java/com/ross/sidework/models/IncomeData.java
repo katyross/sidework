@@ -1,14 +1,24 @@
 package com.ross.sidework.models;
 
-import java.text.DecimalFormat;
 import java.text.ParseException;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class IncomeData {
+
+    // so "see income by payday doesnt print multiple of same payday when choosing to see shifts by payday
+    public static ArrayList<String> getPayDays(List<Shift> shifts){
+        ArrayList<String> payDays = new ArrayList();
+        for (Shift shift : shifts){
+            if (!payDays.contains( shift.getPayDay())){
+                payDays.add(shift.getPayDay());
+            }
+        }
+        return payDays;
+    }
 
     public static double getHoursWorked(Shift shift) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy hh:mm a");

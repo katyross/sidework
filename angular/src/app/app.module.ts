@@ -16,6 +16,7 @@ import {ShiftInfoComponent} from "./shift/shift-info/shift-info.component";
 import {ShiftUpdateComponent} from "./shift/shift-update/shift-update.component";
 import { IncomeListComponent } from './income/income-list/income-list.component';
 import {IncomeService} from "./income/income.service";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 @NgModule({
@@ -31,12 +32,13 @@ import {IncomeService} from "./income/income.service";
     ShiftUpdateComponent,
     IncomeListComponent,
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        AppRoutingModule,
+        HttpClientModule,
+        NgbModule
+    ],
   providers: [
     RestaurantService,
     ShiftService,

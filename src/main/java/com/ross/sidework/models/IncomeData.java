@@ -1,13 +1,78 @@
 package com.ross.sidework.models;
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class IncomeData {
+
+    public static ArrayList<Shift> findShiftsByDateSearchValue(String fromDate, String toDate, Iterable<Shift> allShifts){
+        ArrayList<Shift> results = new ArrayList<>();
+            // if only wanting to check income on one date
+        if (toDate.isBlank()){
+            for (Shift shift : allShifts){
+                if (shift.getInTime().contains(fromDate)){
+                    results.add(shift);
+                }
+            }
+        }
+
+        if (!fromDate.equals(toDate)){
+            for (Shift shift : allShifts) {
+                if (validatePayPeriod(shift, fromDate,toDate)){
+                    results.add(shift);
+                }
+            }
+        }
+        return results;
+    }
+
+    public static ArrayList<Shift> findShiftByPayDay(String payDay, Iterable<Shift> allShifts){
+        ArrayList<Shift> results = new ArrayList<>();
+        for (Shift shift : allShifts) {
+            if (shift.getPayDay().contains(payDay)){
+                results.add(shift);
+            }
+        }
+        return results;
+    }
+
+    public static ArrayList<Shift> findShiftByRestaurant(String restaurant, Iterable<Shift> allShifts){
+        ArrayList<Shift> results = new ArrayList<>();
+        for (Shift shift: allShifts) {
+            if (shift.getRestaurant().getName().toLowerCase().equals(restaurant.toLowerCase())){
+                results.add(shift);
+            }
+        }
+        return results;
+    }
+
+    // determines if shift date is within search parameters from/toDate (i refer between these two dates as a payPeriod)
+    public static boolean validatePayPeriod(Shift shift, String fromDate, String toDate){
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        //in controller class, pay-period parameter will be determined by iterating through pay-period repository
+        LocalDate shiftDate, payStart, payEnd;
+        // determine date of shift, change to LocalDate type
+        shiftDate = LocalDate.parse(shift.getInTime().substring(0,10),format);
+        payStart = LocalDate.parse(fromDate,format);
+        payEnd = LocalDate.parse(toDate,format);
+        // determine if date is within existing pay period
+        if (shiftDate.isBefore(payEnd)
+                && shiftDate.isAfter(payStart)) {
+            return true;
+        } else if (shiftDate.isEqual(payEnd)|| shiftDate.isEqual(payStart)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     // so "see income by payday doesnt print multiple of same payday when choosing to see shifts by payday
     public static ArrayList<String> getPayDays(List<Shift> shifts){

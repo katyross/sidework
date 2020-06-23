@@ -1,17 +1,31 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {ApiConstants} from "../api-constants";
-
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+};
 @Injectable({
   providedIn: 'root'
 })
 export class IncomeService {
 
+
   constructor(private http: HttpClient) { }
 
-  getIncome(){
+  // getIncome() {
+  //   return this.http
+  //     .get(ApiConstants.INCOME_ENDPOINT)
+  //     .toPromise()
+  //     .then(this.handleSuccess)
+  //     .catch(this.handleError);
+  // }
+
+  getIncomeByParams(searchType : string, searchTerm: string) {
+    let params = new HttpParams().set("searchType",searchType).set("searchTerm",searchTerm);
     return this.http
-      .get(ApiConstants.INCOME_ENDPOINT)
+      .get(ApiConstants.INCOME_ENDPOINT, {params})
       .toPromise()
       .then(this.handleSuccess)
       .catch(this.handleError);

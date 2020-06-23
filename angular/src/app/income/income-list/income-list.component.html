@@ -96,12 +96,29 @@
     </div>
   </div>
   <br>
+  <br>
   <button type="submit" class="btn btn-success"
           (click)="dateToString(dpFromDate.value,dpToDate.value)">Submit</button>
   <br>
 </form>
 
 
-<div *ngFor="let item of incomeList | keyvalue">
-  {{item.key}}   {{item.value}}
+<div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">Totals:</th>
+    <th scope="col">Value:</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of incomeList |keyvalue">
+    <td>
+      {{ item.key.substring(5,item.key.length)}}
+    </td>
+    <td>{{ item.value}}</td>
+  </tr>
+  </tbody>
+</table>
 </div>

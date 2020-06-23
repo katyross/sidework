@@ -11,17 +11,18 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class IncomeData {
-
-    public static ArrayList<Shift> findShiftsByDateSearchValue(String fromDate, String toDate, Iterable<Shift> allShifts){
+    public static ArrayList<Shift> findBySingleDate(String date, Iterable<Shift> allShifts){
         ArrayList<Shift> results = new ArrayList<>();
-            // if only wanting to check income on one date
-        if (toDate.isBlank()){
-            for (Shift shift : allShifts){
-                if (shift.getInTime().contains(fromDate)){
+            for (Shift shift : allShifts) {
+                if (shift.getInTime().contains(date)) {
                     results.add(shift);
                 }
             }
-        }
+                return results;
+    }
+
+    public static ArrayList<Shift> findShiftsByDateSearchValue(String fromDate, String toDate, Iterable<Shift> allShifts){
+        ArrayList<Shift> results = new ArrayList<>();
 
         if (!fromDate.equals(toDate)){
             for (Shift shift : allShifts) {
@@ -66,7 +67,7 @@ public class IncomeData {
         if (shiftDate.isBefore(payEnd)
                 && shiftDate.isAfter(payStart)) {
             return true;
-        } else if (shiftDate.isEqual(payEnd)|| shiftDate.isEqual(payStart)){
+        } else if (shiftDate.isEqual(payEnd) || shiftDate.isEqual(payStart)){
             return true;
         } else {
             return false;
@@ -107,7 +108,9 @@ public class IncomeData {
         // returns value that may easily be multiplied by hourly rate to get hourly pay
         return days+hrs+round;
     }
-
+    public static double roundNumbers(double num){
+        return Math.round(num * 100.0)/100.0;
+    }
     public static double getHourlyPay(Shift shift) throws ParseException {
         double hourlyPay = shift.getRestaurant().getHourlyRate() * getHoursWorked(shift);
         double round = Math.round(hourlyPay * 100.0)/100.0;

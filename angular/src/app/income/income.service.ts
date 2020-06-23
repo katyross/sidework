@@ -14,14 +14,6 @@ export class IncomeService {
 
   constructor(private http: HttpClient) { }
 
-  // getIncome() {
-  //   return this.http
-  //     .get(ApiConstants.INCOME_ENDPOINT)
-  //     .toPromise()
-  //     .then(this.handleSuccess)
-  //     .catch(this.handleError);
-  // }
-
   getIncomeByParams(searchType : string, searchTerm: string) {
     let params = new HttpParams().set("searchType",searchType).set("searchTerm",searchTerm);
     return this.http

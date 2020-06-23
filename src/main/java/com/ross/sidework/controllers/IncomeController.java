@@ -1,18 +1,13 @@
 package com.ross.sidework.controllers;
 
-import com.ross.sidework.data.RestaurantRepository;
 import com.ross.sidework.data.ShiftRepository;
 import com.ross.sidework.models.IncomeData;
-import com.ross.sidework.models.Restaurant;
 import com.ross.sidework.models.Shift;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/income")
@@ -38,7 +33,11 @@ public class IncomeController {
         if (searchType.equals("findByPayDay")){
             allShifts = IncomeData.findShiftByPayDay(searchTerm,shiftRepository.findAll());
         } else if (searchType.equals("findByPayPeriod")){
-            allShifts = IncomeData.findShiftsByDateSearchValue(searchTerm.substring(0,10), searchTerm.substring(10,20),shiftRepository.findAll());
+            if (searchTerm.length()<20){
+                allShifts = IncomeData.findBySingleDate(searchTerm,shiftRepository.findAll());
+            } else {
+                allShifts = IncomeData.findShiftsByDateSearchValue(searchTerm.substring(0, 10), searchTerm.substring(10, 20), shiftRepository.findAll());
+            }
         } else if (searchType.equals("findByRestaurant")){
             allShifts = IncomeData.findShiftByRestaurant(searchTerm, shiftRepository.findAll());
         } else if (searchType.isEmpty() && searchTerm.isEmpty()){
@@ -51,14 +50,13 @@ public class IncomeController {
             tips += IncomeData.getTakeHomePay(shift);
             tipOuts += IncomeData.getTipOutDeductions(shift);
         }
-        double roundHours = Math.round(hours * 100.0)/100.0;
-        double roundTipOuts = Math.round(tipOuts * 100.0)/100.0;
 
-        totalIncome.put("TOTAL HOURS:", roundHours);
-        totalIncome.put("TOTAL HOURLY:", hourly);
-        totalIncome.put("TOTAL TIPS:", Math.round(tips * 100.0)/100.0);
-        totalIncome.put("TOTAL TIP-OUTS:", roundTipOuts);
-        totalIncome.put("TOTAL TAKE-HOME:", Math.round((hourly+tips) * 100.0)/100.0);
+
+        totalIncome.put("TOTAL HOURS: ", IncomeData.roundNumbers(hours));
+        totalIncome.put("TOTAL HOURLY: ", IncomeData.roundNumbers(hourly));
+        totalIncome.put("TOTAL TIPS: ", IncomeData.roundNumbers(tips));
+        totalIncome.put("TOTAL TIP-OUTS: ", IncomeData.roundNumbers(tipOuts));
+        totalIncome.put("TOTAL TAKE-HOME: ", IncomeData.roundNumbers(hourly+tips));
 
         return totalIncome;
     }

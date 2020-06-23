@@ -40,6 +40,7 @@ export class IncomeListComponent implements OnInit {
 
 
   ngOnInit() {
+    this.getIncomeByParams(this.searchType,this.searchTerm);
     this.getPayDayList();
     this.getRestaurants();
   }
@@ -89,6 +90,7 @@ export class IncomeListComponent implements OnInit {
     dpToDate = dpToDate.split("-").reverse().join("/");
 
    this.searchTerm = dpFromDate.concat("").concat(dpToDate);
+   console.log(this.searchTerm);
    this.getIncomeByParams("findByPayPeriod",this.searchTerm);
   }
 

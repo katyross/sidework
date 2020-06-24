@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {IncomeService} from "../income.service";
 import {Router} from "@angular/router";
-import {NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {NgbCalendar, NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import {ShiftService} from "../../shift/shift.service";
 import {Restaurant} from "../../restaurant/restaurant";
 import {RestaurantService} from "../../restaurant/restaurant.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
-
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-income-list',
   templateUrl: './income-list.component.html',
-  styleUrls: ['./income-list.component.css']
+  styleUrls: ['./income-list.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 
 export class IncomeListComponent implements OnInit {
-
+  closeResult: string;
   payDayList: String[];
   restaurantList: Array<Restaurant[]> = [];
   incomeList :  Map<string, number> = new Map<string,number>();
@@ -31,7 +31,8 @@ export class IncomeListComponent implements OnInit {
               private shiftService : ShiftService,
               private router: Router,
               private calendar: NgbCalendar,
-              public formatter: NgbDateParserFormatter) {
+              public formatter: NgbDateParserFormatter,
+              private modalService: NgbModal) {
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 7);
     this.searchTerm="";
@@ -110,5 +111,10 @@ export class IncomeListComponent implements OnInit {
     const parsed = this.formatter.parse(input);
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
+
+  openModal(content) {
+    this.modalService.open(content, { centered: true });
+  }
+
 
 }

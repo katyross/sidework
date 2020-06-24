@@ -1,34 +1,34 @@
-
-
-<ul class = "nav nav-pills">
-  <li class="nav-item">
-    <a routerLink="restaurants" class="nav-link" routerLinkActive="active">Restaurant List</a>
-  </li>
-  <li>
-    <a routerLink="shifts" class="dropdown-item" routerLinkActive="active">All Shifts</a>
-  </li>
-  <li>
-    <a routerLink="shifts/addShift" class="dropdown-item" routerLinkActive="active">Add Shift</a>
-  </li>
-  <li>
-    <a routerLink="addWork" class="nav-link" routerLinkActive="active">Add Restaurant</a>
-  </li>
-  <li>
-    <a routerLink="income" class="nav-link" routerLinkActive="active">Income</a>
-  </li>
-</ul>
-
-
-
-
+<div class="card">
+  <div class="card-body">
 <div class="container">
-  <br>
   <h2 style="text-align: center;">{{title}}</h2>
-  <hr>
-  <div class="card">
-    <div class="card-body">
+
+  <div class="btn-group mr-3">
+    <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+      <button class="btn btn-outline-success" ngbDropdownToggle>Income</button>
+      <div class="dropdown-menu" ngbDropdownMenu>
+        <button ngbDropdownItem>
+          <a routerLink="income" class="nav-link" routerLinkActive="active">View</a>
+        </button>
+        <button ngbDropdownItem>
+          <a routerLink="restaurants" class="dropdown-item" routerLinkActive="active">Restaurants</a>
+        </button>
+        <button ngbDropdownItem>
+          <a routerLink="shifts" class="dropdown-item" routerLinkActive="active">Shifts</a>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<!--&lt;!&ndash;    <a routerLink="shifts/addShift" class="dropdown-item" routerLinkActive="active">Add Shift</a>&ndash;&gt;-->
+<!--&lt;!&ndash;  </li>&ndash;&gt;-->
+<!--&lt;!&ndash;  <li>&ndash;&gt;-->
+<!--&lt;!&ndash;    <a routerLink="addWork" class="nav-link" routerLinkActive="active">Add Restaurant</a>&ndash;&gt;-->
+<!--&lt;!&ndash;  </li>&ndash;&gt;-->
+
+
+
       <router-outlet></router-outlet>
     </div>
   </div>
-
-</div>

@@ -1,124 +1,156 @@
 
+<label>View Income By:</label>
+<!-- VIEW BY PAYDAY-->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">PAY DAY</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div *ngIf="searchType == 'findByPayDay'">
+      <select [(ngModel)]="searchTerm">
+        <option *ngFor="let aPayDay of payDayList"
+                text="{{aPayDay}}"
+                [ngValue]="aPayDay">
+        </option>
+      </select>
+      <br>
+      <br>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-success" (click)=" modal.close('Close click');getIncomeByParams(searchType,searchTerm)">Submit</button>
+  </div>
+</ng-template>
 
+<!--VIEW BY PAYPERIOD-->
+<ng-template #date let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">PAY PERIOD</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <form class="form-inline" *ngIf="searchType == 'findByPayPeriod'">
+    <div class="form-group hidden">
+      <div class="input-group">
+        <input class="form-control"
+               ngbDatepicker
+               #datepicker="ngbDatepicker"
+               [autoClose]="'outside'"
+               (dateSelect)="onDateSelection($event)"
+               [displayMonths]="2"
+               [dayTemplate]="t"
+               outsideDays="hidden"
+               [startDate]="fromDate!">
+        <ng-template #t let-date let-focused="focused">
+          <span class="custom-day"
+                [class.focused]="focused"
+                [class.range]="isRange(date)"
+                [class.faded]="isHovered(date) || isInside(date)"
+                (mouseenter)="hoveredDate = date"
+                (mouseleave)="hoveredDate = null">
+            {{ date.day }}
+          </span>
+        </ng-template>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group" >
+        <input #dpFromDate
+               class="form-control" placeholder="yyyy-mm-dd"
+               name="dpFromDate"
+               [value]="formatter.format(fromDate)"
+               (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"></button>
+        </div>
+      </div>
+    </div>
+    <div class="form-group ml-2">
+      <div class="input-group">
+        <input #dpToDate
+               class="form-control" placeholder="yyyy-mm-dd"
+               name="dpToDate"
+               [value]="formatter.format(toDate)"
+               (input)="toDate = validateInput(toDate, dpToDate.value)">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"></button>
+        </div>
+      </div>
+    </div>
+    <br>
+
+
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-success"
+            (click)="modal.close('Close click');dateToString(dpFromDate.value,dpToDate.value)">Submit</button>
+  </div>
+  </form>
+</ng-template>
+
+<!-- VIEW BY WORKPLACE-->
+<ng-template #restaurant let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">CHOOSE A WORKPLACE</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div *ngIf="searchType == 'findByRestaurant'">
+      <select [(ngModel)]="searchTerm">
+        <option *ngFor="let aRestaurant of restaurantList"
+                text="{{aRestaurant.name}}"
+                [ngValue]="aRestaurant.name">
+        </option>
+      </select>
+      <br>
+      <br>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-success" (click)="modal.close('Close click');getIncomeByParams(searchType,searchTerm)">Submit</button>
+  </div>
+</ng-template>
+<!--VIEW BY BUTTONS-->
 <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="searchType">
-  <label ngbButtonLabel class="btn-primary">
-    <input ngbButton type="radio" value="findByPayDay"> ON PAY DAY
+  <label class="btn btn-outline-primary mb-2 mr-2" (click)="openModal(content)" ngbButtonLabel class="btn-primary">
+    <input ngbButton type="radio" value="findByPayDay"> PAY DAY
   </label>
-  <label ngbButtonLabel class="btn-primary">
-    <input ngbButton type="radio" value= "findByPayPeriod"> DATES
+  <label class="btn btn-outline-primary mb-2 mr-2" (click)="openModal(date)" ngbButtonLabel class="btn-primary">
+      <input ngbButton type="radio" value= "findByPayPeriod"> DATES
   </label>
-  <label ngbButtonLabel class="btn-primary">
+    <label class="btn btn-outline-primary mb-2 mr-2" (click)="openModal(restaurant)" ngbButtonLabel class="btn-primary">
     <input ngbButton type="radio" value="findByRestaurant"> WORKPLACE
-  </label>
+    </label>
   <label ngbButtonLabel class="btn-primary">
-    <input ngbButton type="radio" value=""> ALL
+    <input ngbButton type="radio" value="" (click)="getIncomeByParams(searchType,'')"> ALL
   </label>
-</div>
-
-<div *ngIf="searchType == ''">
-  <br>
-  <button type="submit" class="btn btn-success"
-          (click)="getIncomeByParams(searchType,'')">Submit</button>
-  <br>
-</div>
-
-
-<div *ngIf="searchType == 'findByPayDay'">
-  <select [(ngModel)]="searchTerm">
-    <option *ngFor="let aPayDay of payDayList"
-            text="{{aPayDay}}"
-            [ngValue]="aPayDay">
-    </option>
-  </select>
-  <br>
-  <button type="submit" class="btn btn-success" (click)="getIncomeByParams(searchType,searchTerm)">Submit</button>
-  <br>
-</div>
-
-<div *ngIf="searchType == 'findByRestaurant'">
-  <select [(ngModel)]="searchTerm">
-    <option *ngFor="let aRestaurant of restaurantList"
-            text="{{aRestaurant.name}}"
-            [ngValue]="aRestaurant.name">
-    </option>
-  </select>
-  <br>
-  <button type="submit" class="btn btn-success" (click)="getIncomeByParams(searchType,searchTerm)">Submit</button>
-  <br>
-</div>
-
-<form class="form-inline" *ngIf="searchType == 'findByPayPeriod'">
-  <div class="form-group hidden">
-    <div class="input-group">
-      <input class="form-control"
-             ngbDatepicker
-             #datepicker="ngbDatepicker"
-             [autoClose]="'outside'"
-             (dateSelect)="onDateSelection($event)"
-             [displayMonths]="2"
-             [dayTemplate]="t"
-             outsideDays="hidden"
-             [startDate]="fromDate!">
-      <ng-template #t let-date let-focused="focused">
-        <span class="custom-day"
-              [class.focused]="focused"
-              [class.range]="isRange(date)"
-              [class.faded]="isHovered(date) || isInside(date)"
-              (mouseenter)="hoveredDate = date"
-              (mouseleave)="hoveredDate = null">
-          {{ date.day }}
-        </span>
-      </ng-template>
-    </div>
   </div>
-  <div class="form-group">
-    <div class="input-group" >
-      <input #dpFromDate
-             class="form-control" placeholder="yyyy-mm-dd"
-             name="dpFromDate"
-             [value]="formatter.format(fromDate)"
-             (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"></button>
-      </div>
+
+<br><br>
+
+<!--TABLE-->
+    <div>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Totals:</th>
+        <th scope="col">Value:</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of incomeList |keyvalue">
+        <td>
+          {{ item.key.substring(5,item.key.length)}}
+        </td>
+        <td>{{ item.value}}</td>
+      </tr>
+      </tbody>
+    </table>
     </div>
-  </div>
-  <div class="form-group ml-2">
-    <div class="input-group">
-      <input #dpToDate
-             class="form-control" placeholder="yyyy-mm-dd"
-             name="dpToDate"
-             [value]="formatter.format(toDate)"
-             (input)="toDate = validateInput(toDate, dpToDate.value)">
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"></button>
-      </div>
-    </div>
-  </div>
-  <br>
-  <br>
-  <button type="submit" class="btn btn-success"
-          (click)="dateToString(dpFromDate.value,dpToDate.value)">Submit</button>
-  <br>
-</form>
-
-
-<div>
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th scope="col">Totals:</th>
-    <th scope="col">Value:</th>
-
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let item of incomeList |keyvalue">
-    <td>
-      {{ item.key.substring(5,item.key.length)}}
-    </td>
-    <td>{{ item.value}}</td>
-  </tr>
-  </tbody>
-</table>
-</div>

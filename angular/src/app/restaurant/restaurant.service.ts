@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import{Observable} from "rxjs";
 import {Restaurant} from "./restaurant";
 import {ApiConstants} from "../api-constants";
 
@@ -34,11 +33,17 @@ export class RestaurantService {
 
 
   deleteRestaurant(id: number){
-    return this.http.delete(ApiConstants.RESTAURANT_ENDPOINT +"/info/"+id);
+    return this.http.delete(ApiConstants.RESTAURANT_ENDPOINT +"/info/"+id)
+      .toPromise()
+      .then(this.handleSuccess)
+      .catch(this.handleError);
   }
 
-  getRestaurantList(): Observable<Restaurant[]>{
-    return this.http.get<Restaurant[]>(this.restaurantUrl);
+  getRestaurantList(): Promise<any>{
+    return this.http.get<Restaurant[]>(this.restaurantUrl)
+      .toPromise()
+      .then(this.handleSuccess)
+      .catch(this.handleError);
   }
 
   private handleSuccess(successResponse): Promise<any>{ return Promise.resolve(successResponse);}

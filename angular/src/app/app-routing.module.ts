@@ -5,7 +5,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { RestaurantListComponent } from './restaurant/restaurant-list/restaurant-list.component';
 
 import {ShiftListComponent} from "./shift/shift-list/shift-list.component";
-import {RestaurantUpdateComponent} from "./restaurant/restaurant-update/restaurant-update.component";
 import {AppRoutes} from "./app-routes";
 import {IncomeListComponent} from "./income/income-list/income-list.component";
 
@@ -17,7 +16,6 @@ const routes: Routes = [
   { path: AppRoutes.restaurants, component: RestaurantListComponent },
   { path: 'addWork', component: CreateRestaurantComponent },
   { path: AppRoutes.restaurants + AppRoutes.info, component: RestaurantInfoComponent },
-  { path: AppRoutes.restaurants + AppRoutes.update, component: RestaurantUpdateComponent},
   //shifts
   { path: AppRoutes.shifts, component: ShiftListComponent},
 // income

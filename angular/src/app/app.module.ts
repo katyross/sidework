@@ -10,7 +10,6 @@ import { RestaurantListComponent } from './restaurant/restaurant-list/restaurant
 import {FormsModule} from "@angular/forms";
 import {ShiftService} from "./shift/shift.service";
 import { ShiftListComponent } from './shift/shift-list/shift-list.component';
-import { RestaurantUpdateComponent } from './restaurant/restaurant-update/restaurant-update.component';
 import { IncomeListComponent } from './income/income-list/income-list.component';
 import {IncomeService} from "./income/income.service";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
@@ -29,13 +28,14 @@ import { ShiftInfoComponent } from './shift/shift-info/shift-info.component';
     RestaurantInfoComponent,
     RestaurantListComponent,
     ShiftListComponent,
-    RestaurantUpdateComponent,
     IncomeListComponent,
     ShiftCreateComponent,
     ShiftInfoComponent,
   ],
     entryComponents: [ShiftCreateComponent,
-                      ShiftInfoComponent],
+                      ShiftInfoComponent,
+                      RestaurantInfoComponent,
+                      CreateRestaurantComponent],
     imports: [
         BrowserModule,
         FormsModule,

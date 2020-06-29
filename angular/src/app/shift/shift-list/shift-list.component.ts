@@ -15,6 +15,7 @@ import {ShiftInfoComponent} from "../shift-info/shift-info.component";
   encapsulation: ViewEncapsulation.None
 })
 export class ShiftListComponent implements OnInit {
+
   modalRef : NgbModalRef;
   shiftList: Array<Shift[]> =[];
   shift: Shift;
@@ -51,7 +52,7 @@ export class ShiftListComponent implements OnInit {
     })
      .catch(errorResponse => {
         //error here
-    })
+    });
   }
 
   openInfoModal(id:number) {

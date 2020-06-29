@@ -1,24 +1,84 @@
-<h2>Workplace Details</h2>
-
+<div class="modal-header">
+  <h4 class="modal-title">Restaurant Details</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div style="width: 300px;">
 <hr/>
 <div *ngIf="restaurant">
   <div>
     <label><b>Workplace Name: </b></label> {{restaurant.name}}
   </div>
   <div>
-    <label><b>Server Assistant TipOut: </b></label> {{restaurant.foodTipOutPCT}}
+    <label><b>Server Assistant Tip-Out: </b></label> {{restaurant.foodTipOutPCT}}
   </div>
   <div>
-    <label><b>Bar TipOut: </b></label> {{restaurant.barTipOutPCT}}
+    <label><b>Bar Tip-Out: </b></label> {{restaurant.barTipOutPCT}}
   </div>
   <div>
     <label><b>Hourly Rate: </b></label> {{restaurant.hourlyRate}}
   </div>
-
+</div>
+  </div>
 
 <br>
 <br>
-<button (click)="list()" class="btn btn-primary">Back to Restaurant List</button><br>
-<button (click)="update()" class="btn btn-link">Update</button>
+<button (click)="openUpdate(update)" class="btn btn-link">Update</button>
 <button (click)="deleteRestaurant(restaurant.id)" class="btn btn-danger">Delete</button>
 </div>
+
+<ng-template let-modal #update>
+  <div class="modal-header">
+    <h4 class="modal-title">Update Restaurant Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div style="width: 300px;">
+
+      <hr/>
+      <hr/>
+      <div style="width: 300px;">
+        <form (ngSubmit)="updateRestaurant(updateForm.value);modal.close('Cross click')" #updateForm="ngForm">
+          <div *ngIf="restaurant">
+            <div class="form-group">
+              <label for="name">Restaurant Name</label>
+              <input type="text" value='{{restaurant.name}}'class="form-control" id="name"
+                     required [(ngModel)]="restaurant.name" name="name">
+            </div>
+
+            <div class="form-group">
+              <label for="name">Server Assistant Tip Out Rate</label>
+              <input type="text" value='{{restaurant.foodTipOutPCT}}'
+                     class="form-control"
+                     id="foodTipOutPCT"
+                     required [(ngModel)]="restaurant.foodTipOutPCT"
+                     name="foodTipOutPCT">
+            </div>
+
+            <div class="form-group">
+              <label for="name">Bar Tip Out Rate</label>
+              <input type="text"
+                     value='{{restaurant.barTipOutPCT}}'
+                     class="form-control" id="barTipOutPCT"
+                     required [(ngModel)]="restaurant.barTipOutPCT"
+                     name="barTipOutPCT">
+            </div>
+
+            <div class="form-group">
+              <label for="name">Hourly Rate</label>
+              <input type="text" value='{{restaurant.hourlyRate}}'
+                     class="form-control" id="hourlyRate"
+                     required [(ngModel)]="restaurant.hourlyRate"
+                     name="hourlyRate">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>

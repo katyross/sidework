@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable} from "rxjs";
 import {RestaurantService} from "../restaurant.service";
-import {Router} from '@angular/router';
-import {Restaurant} from "../restaurant";
+import {CreateRestaurantComponent} from "../create-restaurant/create-restaurant.component";
+import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import {RestaurantInfoComponent} from "../restaurant-info/restaurant-info.component";
 
 @Component({
   selector: 'app-restaurant-list',
@@ -10,21 +10,36 @@ import {Restaurant} from "../restaurant";
   styleUrls: ['./restaurant-list.component.css']
 })
 export class RestaurantListComponent implements OnInit {
-    restaurant: Observable<Restaurant[]>;
+    restaurantList: Promise<any>;
+    modalRef: NgbModalRef;
+    id:number;
 
   constructor(private restaurantService: RestaurantService,
-              private router: Router) { }
+              private modalService: NgbModal) { }
 
-  ngOnInit() {
-    this.reloadData();
-  }
+    ngOnInit() {
+    this.getRestaurantList();
+    }
 
-reloadData(){
-    this.restaurant = this.restaurantService.getRestaurantList();
-}
+    getRestaurantList(){
 
+      this.restaurantList = this.restaurantService.getRestaurantList()
+        .then(successResponse => {
+        this.restaurantList = successResponse;
+      })
+        .catch(errorResponse => {
+          //error here
+        });
+    }
 
-    restaurantDetails(id:number){
-    this.router.navigate(['/restaurants/info', id]);
-  }
+    openCreateModal(){
+      this.modalRef = this.modalService.open(CreateRestaurantComponent);
+    }
+
+    openInfoModal(id:number) {
+      this.id = id;
+      this.modalRef = this.modalService.open(RestaurantInfoComponent);
+      this.modalRef.componentInstance.id = this.id;
+   }
+
 }

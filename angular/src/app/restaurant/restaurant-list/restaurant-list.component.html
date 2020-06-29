@@ -11,9 +11,9 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let aRestaurant of restaurant | async">
+      <tr *ngFor="let aRestaurant of restaurantList">
         <td>{{aRestaurant.name}}</td>
-          <button (click)="restaurantDetails(aRestaurant.id)" class="btn btn-info" style="margin-left: 10px">Info</button>
+          <button (click)="openInfoModal(aRestaurant.id)" class="btn btn-info" style="margin-left: 10px">Info</button>
       </tr>
       </tbody>
     </table>

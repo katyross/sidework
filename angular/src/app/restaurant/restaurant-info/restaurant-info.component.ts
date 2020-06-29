@@ -1,45 +1,61 @@
 import { Restaurant } from '../restaurant';
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { RestaurantService} from '../restaurant.service';
 import { Router, ActivatedRoute} from "@angular/router";
+import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-restaurant-info',
   templateUrl: './restaurant-info.component.html',
   styleUrls: ['./restaurant-info.component.css']
 })
+
 export class RestaurantInfoComponent implements OnInit {
 
   id: number;
-  restaurant: object;
+  restaurant: Restaurant = new Restaurant();
 
-  constructor(private route: ActivatedRoute, private router: Router,
-              private restaurantService: RestaurantService) { }
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private restaurantService: RestaurantService,
+              private activeModal: NgbActiveModal,
+              private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.restaurant = new Restaurant();
-    this.id = this.route.snapshot.params['id'];
+    this.getRestaurant();
+  }
 
-    this.restaurantService.getRestaurant(this.id)
-      .then(successResponse => {
-        this.restaurant = successResponse;
-      }).catch();
-   }
+  getRestaurant() {
+    if (this.id) {
+      this.restaurantService.getRestaurant(this.id)
+        .then(successResponse => {
+          this.restaurant = successResponse;
+        }).catch();
+    }
+  }
 
   deleteRestaurant(id: number) {
-    this.restaurantService.deleteRestaurant(this.id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.list();
-        });
+    this.restaurantService.deleteRestaurant(id)
+      .then(successResponse => {
+        this.refresh();
+      })
+      .catch();
   }
 
-  list(){
-    this.router.navigate(['/restaurants']);
+  refresh(): void {
+    window.location.reload();
   }
 
-  update(){
-    this.router.navigate(['/restaurants/update/'+ this.id]);
+  openUpdate(content: any){
+    this.modalService.open(content);
   }
+
+  updateRestaurant( restaurant: Restaurant){
+    this.restaurant = restaurant;
+    this.restaurantService.updateRestaurant(this.id,this.restaurant)
+      .then(successResponse => {
+
+      }).catch();
+  }
+
 }

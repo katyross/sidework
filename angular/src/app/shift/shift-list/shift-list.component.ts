@@ -4,8 +4,8 @@ import {ShiftService} from "../shift.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {Restaurant} from "../../restaurant/restaurant";
-import {ShiftUpdateComponent} from "../shift-update/shift-update.component";
 import {ShiftCreateComponent} from "../shift-create/shift-create.component";
+import {ShiftInfoComponent} from "../shift-info/shift-info.component";
 
 
 @Component({
@@ -39,10 +39,6 @@ export class ShiftListComponent implements OnInit {
     this.getRestaurants();
   }
 
-  openUpdateModal(){
-    this.modalRef = this.modalService.open(ShiftUpdateComponent);
-    this.modalRef.componentInstance.id = this.id;
-  }
 
   openCreateModal(){
     this.modalRef = this.modalService.open(ShiftCreateComponent);
@@ -58,8 +54,10 @@ export class ShiftListComponent implements OnInit {
     })
   }
 
-  openModal(content) {
-    this.modalService.open(content, { centered: true });
+  openInfoModal(id:number) {
+    this.id = id;
+    this.modalRef = this.modalService.open(ShiftInfoComponent);
+    this.modalRef.componentInstance.id = this.id;
   }
 
   getRestaurants(): any{
@@ -69,25 +67,6 @@ export class ShiftListComponent implements OnInit {
       .catch(errorResponse => {
 
       });
-  }
-
-
-  getShiftbyId(id:number,content:any){
-    this.id=id;
-    this.shiftService.getShift(this.id)
-      .then(successResponse =>{
-        this.shift = successResponse;
-        this.openModal(content);
-      })
-      .catch();
-  }
-
-  deleteShift(id: number){
-    this.shiftService.deleteShift(id)
-      .then(successResponse => {
-        this.ngOnInit();
-      })
-      .catch();
   }
 
 }

@@ -1,22 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {ShiftService} from "../shift.service";
 import {Shift} from "../shift";
 import {Restaurant} from "../../restaurant/restaurant";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ShiftService} from "../shift.service";
+import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-  selector: 'app-shift-update',
-  templateUrl: './shift-update.component.html',
-  styleUrls: ['./shift-update.component.css'],
+  selector: 'app-shift-info',
+  templateUrl: './shift-info.component.html',
+  styleUrls: ['./shift-info.component.css']
 })
-export class ShiftUpdateComponent implements OnInit {
+export class ShiftInfoComponent implements OnInit {
 
   id:number;
   shift: Shift = new Shift();
   restaurantList: Restaurant[];
 
+
+
   constructor(private route: ActivatedRoute,
               private router: Router,
+              private activeModal: NgbActiveModal,
+              private modalService: NgbModal,
               private shiftService: ShiftService) { }
 
   ngOnInit() {
@@ -34,8 +39,7 @@ export class ShiftUpdateComponent implements OnInit {
     }
   }
 
-  updateShift(id:number, shift: Shift){
-    this.id = id;
+  updateShift(shift: Shift){
     this.shift = shift;
     this.shiftService
       .updateShift(this.id, this.shift)
@@ -44,13 +48,27 @@ export class ShiftUpdateComponent implements OnInit {
         }
       ).catch();
   }
+  openUpdateModal(content){
+    this.modalService.open(content);
+  }
+  refresh(): void {
+    window.location.reload();
+  }
 
   getRestaurants(): any{
-    this.shiftService.getAllRestaurants().then(successResponse => {
+    this.shiftService.getAllRestaurants()
+      .then(successResponse => {
       this.restaurantList = successResponse;
     })
       .catch(errorResponse => {
       });
   }
 
+  deleteShift(id: number){
+    this.shiftService.deleteShift(id)
+      .then(successResponse => {
+        this.refresh();
+      })
+      .catch();
+  }
 }

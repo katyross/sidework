@@ -14,7 +14,7 @@
       <tr *ngFor="let aShift of shiftList ">
         <td>{{aShift.restaurant?.name}}</td>
         <td>{{aShift.inTime.substring(0,10)}}</td>
-          <a class="btn btn-info" style="margin-left: 10px" (click)="getShiftbyId(aShift.id,contentId)">Info</a>
+          <a class="btn btn-info" style="margin-left: 10px" (click)="openInfoModal(aShift.id)">Info</a>
       </tr>
       </tbody>
     </table>

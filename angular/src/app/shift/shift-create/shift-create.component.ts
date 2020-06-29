@@ -17,8 +17,10 @@ export class ShiftCreateComponent implements OnInit {
   constructor(private shiftService: ShiftService,
               private router: Router,
               private activeModal: NgbActiveModal) {
+
     this.shift = new Shift();
     this.restaurantList = [];
+
   }
 
   ngOnInit() {
@@ -29,7 +31,7 @@ export class ShiftCreateComponent implements OnInit {
       // find restaurantWorked
       this.shiftService.saveShift(shift)
         .then(successResponse =>{
-          this.goToShiftList();
+          this.refresh();
         })
         .catch(errorResponse => {
         });
@@ -43,9 +45,8 @@ export class ShiftCreateComponent implements OnInit {
 
       });
   }
-
-  //go to the list of shifts once shift is submitted
-  goToShiftList(){
-    this.router.navigate(['/shifts']);
+  refresh(): void {
+    window.location.reload();
   }
+
 }

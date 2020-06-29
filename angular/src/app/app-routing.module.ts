@@ -8,7 +8,7 @@ import {ShiftListComponent} from "./shift/shift-list/shift-list.component";
 import {RestaurantUpdateComponent} from "./restaurant/restaurant-update/restaurant-update.component";
 import {AppRoutes} from "./app-routes";
 import {IncomeListComponent} from "./income/income-list/income-list.component";
-import {ShiftUpdateComponent} from "./shift/shift-update/shift-update.component";
+
 
 
 const routes: Routes = [
@@ -20,7 +20,6 @@ const routes: Routes = [
   { path: AppRoutes.restaurants + AppRoutes.update, component: RestaurantUpdateComponent},
   //shifts
   { path: AppRoutes.shifts, component: ShiftListComponent},
-   { path: AppRoutes.shifts + AppRoutes.update, component: ShiftUpdateComponent},
 // income
   {path: AppRoutes.income, component: IncomeListComponent},
 

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ShiftUpdateComponent } from './shift-update.component';
+import { ShiftInfoComponent } from './shift-info.component';
 
-describe('ShiftUpdateComponent', () => {
-  let component: ShiftUpdateComponent;
-  let fixture: ComponentFixture<ShiftUpdateComponent>;
+describe('ShiftInfoComponent', () => {
+  let component: ShiftInfoComponent;
+  let fixture: ComponentFixture<ShiftInfoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShiftUpdateComponent ]
+      declarations: [ ShiftInfoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShiftUpdateComponent);
+    fixture = TestBed.createComponent(ShiftInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

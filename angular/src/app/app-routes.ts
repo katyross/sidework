@@ -3,6 +3,5 @@ export class AppRoutes {
   public static shifts = 'shifts';
   public static income = 'income';
   public static info = '/info/:id';
-  public static update = '/update/:id';
   public static create = '/create';
 }

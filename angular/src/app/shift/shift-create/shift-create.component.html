@@ -6,17 +6,44 @@
   </div>
   <div class="modal-body">
     <div style="width: 300px;">
+
+
       <form #createShift="ngForm">
 
-        <div class="form-group">
-          <label for="inTime">IN TIME:</label>
-          <input type="text" class="form-control" id="inTime" required [(ngModel)]="shift.inTime" name="inTime">
-        </div>
+          <label>IN TIME:</label>
+          <form class="form-inline">
+            <div class="form-group">
+              <div class="input-group">
+                <input  class="form-control" placeholder="yyyy-mm-dd"
+                        name= "d" [(ngModel)]="inDate" ngbDatepicker #d="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                </div>
+              </div>
+            </div>
+          </form>
 
+      <ngb-timepicker [(ngModel)]="time" [meridian]="meridian"></ngb-timepicker>
+          <pre>Model: {{ inDate | json }}</pre>
+          <pre>{{time | json}}</pre>
+
+
+      <label>OUT TIME:</label>
+      <form class="form-inline">
         <div class="form-group">
-          <label for="outTime">OUT TIME: </label>
-          <input type="text" class="form-control" id="outTime" required [(ngModel)]="shift.outTime" name="outTime">
+          <div class="input-group">
+            <input  class="form-control" placeholder="yyyy-mm-dd"
+                    name= "dO" [(ngModel)]="outDate" ngbDatepicker #dO="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="dO.toggle()" type="button"></button>
+            </div>
+          </div>
         </div>
+      </form>
+
+      <ngb-timepicker [(ngModel)]="outTime" [meridian]="aMeridian"></ngb-timepicker>
+      <pre>Model: {{ outDate | json }}</pre>
+      <pre>{{outTime | json}}</pre>
 
         <div class="form-group">
           <label for="payDay">PAY DAY:</label>

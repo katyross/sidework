@@ -15,7 +15,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 })
 
 export class IncomeListComponent implements OnInit {
-  closeResult: string;
+
   payDayList: String[];
   restaurantList: Array<Restaurant[]> = [];
   incomeList :  Map<string, number> = new Map<string,number>();
@@ -33,10 +33,12 @@ export class IncomeListComponent implements OnInit {
               private calendar: NgbCalendar,
               public formatter: NgbDateParserFormatter,
               private modalService: NgbModal) {
+
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 7);
     this.searchTerm="";
     this.searchType="";
+
     }
 
 
@@ -86,6 +88,7 @@ export class IncomeListComponent implements OnInit {
       this.fromDate = date;
     }
   }
+
  dateToString(dpFromDate:string,dpToDate:string){
     dpFromDate = dpFromDate.split("-").reverse().join("/");
     dpToDate = dpToDate.split("-").reverse().join("/");

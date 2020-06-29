@@ -23,8 +23,6 @@ export class ShiftListComponent implements OnInit {
   restaurantList: Restaurant[];
   id:number;
 
-
-
   constructor(private shiftService: ShiftService,
               private router: Router,
               private route: ActivatedRoute,

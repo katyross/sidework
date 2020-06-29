@@ -26,7 +26,7 @@
 <br>
 <br>
 <button (click)="openUpdate(update)" class="btn btn-link">Update</button>
-<button (click)="deleteRestaurant(restaurant.id)" class="btn btn-danger">Delete</button>
+<button (click)="deleteRestaurant(restaurant.id);activeModal.close('Cross click')" class="btn btn-danger">Delete</button>
 </div>
 
 <ng-template let-modal #update>

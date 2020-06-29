@@ -20,7 +20,10 @@ export class RestaurantService {
   }
 
   save(restaurant: Restaurant) {
-    return this.http.post<Restaurant>(this.restaurantUrl,restaurant);
+    return this.http.post<Restaurant>(this.restaurantUrl,restaurant)
+      .toPromise()
+      .then(this.handleSuccess)
+      .catch(this.handleError);
   }
 
   updateRestaurant(id: number, restaurant: Restaurant): Promise<any> {

@@ -1,4 +1,4 @@
-import { RestaurantInfoComponent } from './restaurant/restaurant-info/restaurant-info.component';
+
 import { CreateRestaurantComponent } from './restaurant/create-restaurant/create-restaurant.component';
 import { NgModule} from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -15,7 +15,6 @@ const routes: Routes = [
   //{ path: '', redirectTo: 'restaurants', pathMatch: 'full' },
   { path: AppRoutes.restaurants, component: RestaurantListComponent },
   { path: 'addWork', component: CreateRestaurantComponent },
-  { path: AppRoutes.restaurants + AppRoutes.info, component: RestaurantInfoComponent },
   //shifts
   { path: AppRoutes.shifts, component: ShiftListComponent},
 // income

@@ -1,26 +1,36 @@
-<h3>Add Workplace:</h3>
-<div style="width: 300px;">
-  <form (ngSubmit)="onSubmit()" #createRestaurant="ngForm">
-    <div class="form-group">
-      <label for="name">Restaurant Name</label>
-      <input type="text" class="form-control" id="name" required [(ngModel)]="restaurant.name" name="name">
-    </div>
+<div class="modal-header">
+  <h4 class="modal-title">Add Workplace</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div style="width: 300px;">
+    <hr/>
+    <div style="width: 300px;">
+      <form (ngSubmit)="onSubmit(createRestaurant.value); activeModal.close('Cross click')" #createRestaurant="ngForm">
+        <div class="form-group">
+          <label for="name">Restaurant Name</label>
+          <input type="text" class="form-control" id="name" required [(ngModel)]="restaurant.name" name="name">
+        </div>
 
-    <div class="form-group">
-      <label for="name">Server Assistant Tip Out Rate</label>
-      <input type="text" class="form-control" id="foodTipOutPCT" required [(ngModel)]="restaurant.foodTipOutPCT" name="foodTipOutPCT">
-    </div>
+        <div class="form-group">
+          <label for="name">Server Assistant Tip Out Rate</label>
+          <input type="text" class="form-control" id="foodTipOutPCT" required [(ngModel)]="restaurant.foodTipOutPCT" name="foodTipOutPCT">
+        </div>
 
-    <div class="form-group">
-      <label for="name">Bar Tip Out Rate</label>
-      <input type="text" class="form-control" id="barTipOutPCT" required [(ngModel)]="restaurant.barTipOutPCT" name="barTipOutPCT">
-    </div>
+        <div class="form-group">
+          <label for="name">Bar Tip Out Rate</label>
+          <input type="text" class="form-control" id="barTipOutPCT" required [(ngModel)]="restaurant.barTipOutPCT" name="barTipOutPCT">
+        </div>
 
-    <div class="form-group">
-      <label for="name">Hourly Rate</label>
-      <input type="text" class="form-control" id="hourlyRate" required [(ngModel)]="restaurant.hourlyRate" name="hourlyRate">
-    </div>
+        <div class="form-group">
+        <label for="name">Hourly Rate</label>
+        <input type="text" class="form-control" id="hourlyRate" required [(ngModel)]="restaurant.hourlyRate" name="hourlyRate">
+       </div>
 
-    <button type="submit" class="btn btn-success">Submit</button>
-  </form>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+    </div>
+  </div>
 </div>

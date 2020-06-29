@@ -1,28 +1,38 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import { Restaurant } from "../restaurant";
 import { RestaurantService } from "../restaurant.service";
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
+import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-create-restaurant',
   templateUrl: './create-restaurant.component.html',
   styleUrls: ['./create-restaurant.component.css']
 })
-export class CreateRestaurantComponent {
+export class CreateRestaurantComponent{
   restaurant: Restaurant;
 
   constructor(private route: ActivatedRoute,
               private restaurantService: RestaurantService,
-              private router: Router) {
+              private activeModal: NgbActiveModal) {
     this.restaurant = new Restaurant();
   }
 
-  onSubmit(){
-      this.restaurantService.save(this.restaurant).subscribe(data => this.gotoList());
+
+  onSubmit(restaurant: Restaurant){
+     this.restaurant = restaurant;
+      this.restaurantService
+        .save(this.restaurant)
+        .then(successResponse => {
+          this.refresh();
+        })
+        .catch(errorResponse => {
+
+        });
     }
 
-  gotoList(){
-    this.router.navigate(['/restaurants']);
-  }
+    refresh():void{
+      window.location.reload();
+    }
 
 }

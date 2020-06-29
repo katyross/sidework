@@ -26,24 +26,27 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     RestaurantInfoComponent,
     RestaurantListComponent,
     ShiftListComponent,
-    ShiftFormComponent,
     RestaurantUpdateComponent,
-    ShiftInfoComponent,
     ShiftUpdateComponent,
     IncomeListComponent,
+    ShiftCreateComponent,
   ],
+    entryComponents: [ShiftUpdateComponent,
+                      ShiftCreateComponent],
     imports: [
         BrowserModule,
         FormsModule,
         AppRoutingModule,
         HttpClientModule,
-        NgbModule
+        NgbModule,
     ],
+
   providers: [
     RestaurantService,
     ShiftService,
     IncomeService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
+
 export class AppModule { }

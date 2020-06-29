@@ -1,5 +1,4 @@
 
-<label>View Income By:</label>
 <!-- VIEW BY PAYDAY-->
 <ng-template #content let-modal>
   <div class="modal-header">
@@ -25,7 +24,7 @@
   </div>
 </ng-template>
 
-<!--VIEW BY PAYPERIOD-->
+<!--VIEW BY PAY-PERIOD-->
 <ng-template #date let-modal>
   <div class="modal-header">
     <h4 class="modal-title">PAY PERIOD</h4>
@@ -116,8 +115,10 @@
     <button type="submit" class="btn btn-success" (click)="modal.close('Close click');getIncomeByParams(searchType,searchTerm)">Submit</button>
   </div>
 </ng-template>
+
 <!--VIEW BY BUTTONS-->
 <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="searchType">
+  <label class = "btn btn-primary" aria-pressed="true" aria-disabled="true">View Income By:</label>
   <label class="btn btn-outline-primary mb-2 mr-2" (click)="openModal(content)" ngbButtonLabel class="btn-primary">
     <input ngbButton type="radio" value="findByPayDay"> PAY DAY
   </label>
@@ -131,8 +132,6 @@
     <input ngbButton type="radio" value="" (click)="getIncomeByParams(searchType,'')"> ALL
   </label>
   </div>
-
-<br><br>
 
 <!--TABLE-->
     <div>

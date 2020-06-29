@@ -7,7 +7,7 @@ import {Restaurant} from "../../restaurant/restaurant";
 @Component({
   selector: 'app-shift-update',
   templateUrl: './shift-update.component.html',
-  styleUrls: ['./shift-update.component.css']
+  styleUrls: ['./shift-update.component.css'],
 })
 export class ShiftUpdateComponent implements OnInit {
 
@@ -25,7 +25,6 @@ export class ShiftUpdateComponent implements OnInit {
   }
 
   getShift(){
-    this.id = this.route.snapshot.params["id"];
     if (this.id) {
       this.shiftService
         .getShift(this.id)
@@ -36,16 +35,14 @@ export class ShiftUpdateComponent implements OnInit {
   }
 
   updateShift(id:number, shift: Shift){
+    this.id = id;
+    this.shift = shift;
     this.shiftService
       .updateShift(this.id, this.shift)
       .then( successResponse => {
-          this.list();
+
         }
       ).catch();
-  }
-
-  list(){
-    this.router.navigate(['/shifts/info/'+this.id]);
   }
 
   getRestaurants(): any{
@@ -55,4 +52,5 @@ export class ShiftUpdateComponent implements OnInit {
       .catch(errorResponse => {
       });
   }
+
 }

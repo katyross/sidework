@@ -6,16 +6,12 @@
   </div>
   <div class="modal-body">
     <div style="width: 300px;">
-
-
-      <form #createShift="ngForm">
-
-          <label>IN TIME:</label>
-          <form class="form-inline">
+      <label>IN TIME:</label>
+      <form class="form-inline">
             <div class="form-group">
               <div class="input-group">
                 <input  class="form-control" placeholder="yyyy-mm-dd"
-                        name= "d" [(ngModel)]="inDate" ngbDatepicker #d="ngbDatepicker">
+                        name= "d" [(ngModel)]="inDateModel" ngbDatepicker #d="ngbDatepicker">
                 <div class="input-group-append">
                   <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
                 </div>
@@ -23,9 +19,7 @@
             </div>
           </form>
 
-      <ngb-timepicker [(ngModel)]="time" [meridian]="meridian"></ngb-timepicker>
-          <pre>Model: {{ inDate | json }}</pre>
-          <pre>{{time | json}}</pre>
+        <ngb-timepicker [(ngModel)]="inTimeModel" [meridian]="meridian" (click)="dateAndTime(inTimeModel, inDateModel)"></ngb-timepicker>
 
 
       <label>OUT TIME:</label>
@@ -33,7 +27,7 @@
         <div class="form-group">
           <div class="input-group">
             <input  class="form-control" placeholder="yyyy-mm-dd"
-                    name= "dO" [(ngModel)]="outDate" ngbDatepicker #dO="ngbDatepicker">
+                    name= "dO" [(ngModel)]="outDateModel" ngbDatepicker #dO="ngbDatepicker">
             <div class="input-group-append">
               <button class="btn btn-outline-secondary calendar" (click)="dO.toggle()" type="button"></button>
             </div>
@@ -41,15 +35,18 @@
         </div>
       </form>
 
-      <ngb-timepicker [(ngModel)]="outTime" [meridian]="aMeridian"></ngb-timepicker>
-      <pre>Model: {{ outDate | json }}</pre>
-      <pre>{{outTime | json}}</pre>
+      <ngb-timepicker [(ngModel)]="outTimeModel" [meridian]="aMeridian" (click)="dateAndTime(outTimeModel,outDateModel)"></ngb-timepicker>
+
+      <pre>in time: {{inDateAndTime | json}}</pre>
+      <pre>out time: {{outDateAndTime | json}}</pre>
+
 
         <div class="form-group">
           <label for="payDay">PAY DAY:</label>
           <input type="text" class="form-control" id="payDay" required [(ngModel)]="shift.payDay" name="payDay">
         </div>
 
+      <form #createShift="ngForm">
         <div class="form-group">
           <label for="foodSales">Food Sales</label>
           <input type="text" class="form-control" id="foodSales" required [(ngModel)]="shift.foodSales" name="foodSales">

@@ -24,11 +24,10 @@ export class ShiftCreateComponent implements OnInit {
   inDateModel: NgbDateStruct;
   outDateModel: NgbDateStruct;
   payDayModel: NgbDateStruct;
-
-  // after formatting date object to string
   inTimeModel: NgbTimeStruct;
   outTimeModel: NgbTimeStruct;
 
+  // after formatting date / time object to string
   inDateAndTime: string;
   outDateAndTime: string;
   payDate: string;
@@ -136,7 +135,11 @@ export class ShiftCreateComponent implements OnInit {
       this.outDateAndTime = this.dateToString(aDate).concat(" ").concat(this.formatTime(aTime));
     }
     }
-
+    // changes out times picked date to day in time is set to
+  // most shifts are completed within same calendar day
+   updateOutDatePicker(event):void{
+    this.outDateModel = event;
+    }
   refresh(): void {
     window.location.reload();
   }

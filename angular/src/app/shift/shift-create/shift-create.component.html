@@ -10,7 +10,7 @@
       <form class="form-inline">
             <div class="form-group">
               <div class="input-group">
-                <input  class="form-control" placeholder="yyyy-mm-dd"
+                <input  class="form-control" placeholder="yyyy-mm-dd" (ngModelChange)="updateOutDatePicker($event)"
                         name= "d" [(ngModel)]="inDateModel" ngbDatepicker #d="ngbDatepicker">
                 <div class="input-group-append">
                   <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
@@ -36,15 +36,6 @@
       </form>
 
       <ngb-timepicker [(ngModel)]="outTimeModel" [meridian]="aMeridian"></ngb-timepicker>
-
-<!--      <pre>in time: {{inDateAndTime | json}}</pre>-->
-<!--      <pre>out time: {{outDateAndTime | json}}</pre>-->
-<!--      <pre>pay date: {{payDate | json}}</pre>-->
-
-<!--&lt;!&ndash;        <div class="form-group">&ndash;&gt;-->
-<!--&lt;!&ndash;          <label for="payDay">PAY DAY:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;          <input type="text" class="form-control" id="payDay" required [(ngModel)]="shift.payDay" name="payDay">&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
 
       <label>PAY DAY:</label>
       <form class="form-inline">

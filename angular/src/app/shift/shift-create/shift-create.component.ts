@@ -20,14 +20,18 @@ export class ShiftCreateComponent implements OnInit {
 
   shift: Shift;
   restaurantList: Restaurant[];
+
   inDateModel: NgbDateStruct;
   outDateModel: NgbDateStruct;
+  payDayModel: NgbDateStruct;
+
   // after formatting date object to string
   inTimeModel: NgbTimeStruct;
   outTimeModel: NgbTimeStruct;
 
   inDateAndTime: string;
   outDateAndTime: string;
+  payDate: string;
 
   timeString: string;
   dateString: string;
@@ -44,6 +48,8 @@ export class ShiftCreateComponent implements OnInit {
 
     this.inDateModel = calendar.getToday();
     this.outDateModel = calendar.getToday();
+    this.payDayModel = calendar.getToday();
+
     this.shift = new Shift();
     this.restaurantList = [];
 
@@ -53,7 +59,11 @@ export class ShiftCreateComponent implements OnInit {
     this.getRestaurants();
   }
 
-    onSubmit(shift: any) {
+    onSubmit(shift: Shift) {
+    shift.payDay = this.payDate;
+    shift.inTime = this.inDateAndTime;
+    shift.outTime = this.outDateAndTime;
+
       this.shiftService.saveShift(shift)
         .then(successResponse =>{
           this.refresh();
@@ -72,13 +82,19 @@ export class ShiftCreateComponent implements OnInit {
       });
   }
 
+  // turn date obj to string
   dateToString(aDate: NgbDateStruct): string {
     // format date
-    this.dateString = this.parserFormatter.format(aDate);
-    this.dateString = this.dateString.split("-").reverse().join("/");
+    if (aDate == this.payDayModel){
+      this.payDate = this.parserFormatter.format(aDate);
+      this.payDate = this.payDate.split("-").reverse().join("/");
+    } else {
+      this.dateString = this.parserFormatter.format(aDate);
+      this.dateString = this.dateString.split("-").reverse().join("/");
+    }
     return this.dateString;
   }
-
+  // turn time obj to string
   formatTime(aTime:NgbTimeStruct): string{
     // format time
     if (aTime.hour >= 12) {
@@ -112,7 +128,7 @@ export class ShiftCreateComponent implements OnInit {
 
     return this.timeString;
   }
-
+  // combines formatted date and time objects to valid string to send to server
   dateAndTime(aTime:NgbTimeStruct, aDate:NgbDateStruct){
     if (aTime == this.inTimeModel && aDate == this.inDateModel) {
       this.inDateAndTime = this.dateToString(aDate).concat(" ").concat(this.formatTime(aTime));

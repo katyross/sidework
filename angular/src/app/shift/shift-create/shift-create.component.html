@@ -19,7 +19,7 @@
             </div>
           </form>
 
-        <ngb-timepicker [(ngModel)]="inTimeModel" [meridian]="meridian" (click)="dateAndTime(inTimeModel, inDateModel)"></ngb-timepicker>
+        <ngb-timepicker [(ngModel)]="inTimeModel" [meridian]="meridian"></ngb-timepicker>
 
 
       <label>OUT TIME:</label>
@@ -35,16 +35,29 @@
         </div>
       </form>
 
-      <ngb-timepicker [(ngModel)]="outTimeModel" [meridian]="aMeridian" (click)="dateAndTime(outTimeModel,outDateModel)"></ngb-timepicker>
+      <ngb-timepicker [(ngModel)]="outTimeModel" [meridian]="aMeridian"></ngb-timepicker>
 
-      <pre>in time: {{inDateAndTime | json}}</pre>
-      <pre>out time: {{outDateAndTime | json}}</pre>
+<!--      <pre>in time: {{inDateAndTime | json}}</pre>-->
+<!--      <pre>out time: {{outDateAndTime | json}}</pre>-->
+<!--      <pre>pay date: {{payDate | json}}</pre>-->
 
+<!--&lt;!&ndash;        <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;          <label for="payDay">PAY DAY:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;          <input type="text" class="form-control" id="payDay" required [(ngModel)]="shift.payDay" name="payDay">&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
 
+      <label>PAY DAY:</label>
+      <form class="form-inline">
         <div class="form-group">
-          <label for="payDay">PAY DAY:</label>
-          <input type="text" class="form-control" id="payDay" required [(ngModel)]="shift.payDay" name="payDay">
+          <div class="input-group">
+            <input  class="form-control" placeholder="yyyy-mm-dd"
+                    name= "dO" [(ngModel)]="payDayModel" ngbDatepicker #dP="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="dP.toggle()" type="button"></button>
+            </div>
+          </div>
         </div>
+      </form>
 
       <form #createShift="ngForm">
         <div class="form-group">
@@ -79,7 +92,11 @@
           </select>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-success" (click)= "onSubmit(createShift.value); activeModal.close('Close click')">Submit</button>
+          <button type="submit" class="btn btn-success" (click)= "dateToString(payDayModel);
+                                                                  dateAndTime(inTimeModel, inDateModel);
+                                                                  dateAndTime(outTimeModel,outDateModel);
+                                                                  onSubmit(createShift.value);
+                                                                  activeModal.close('Close click')" >Submit</button>
         </div>
       </form>
     </div>

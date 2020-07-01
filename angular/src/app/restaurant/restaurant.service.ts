@@ -43,7 +43,7 @@ export class RestaurantService {
   }
 
   getRestaurantList(): Promise<any>{
-    return this.http.get<Restaurant[]>(this.restaurantUrl)
+    return this.http.get(this.restaurantUrl)
       .toPromise()
       .then(this.handleSuccess)
       .catch(this.handleError);

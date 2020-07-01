@@ -3,6 +3,7 @@ import {RestaurantService} from "../restaurant.service";
 import {CreateRestaurantComponent} from "../create-restaurant/create-restaurant.component";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {RestaurantInfoComponent} from "../restaurant-info/restaurant-info.component";
+import {Restaurant} from "../restaurant";
 
 @Component({
   selector: 'app-restaurant-list',
@@ -10,7 +11,7 @@ import {RestaurantInfoComponent} from "../restaurant-info/restaurant-info.compon
   styleUrls: ['./restaurant-list.component.css']
 })
 export class RestaurantListComponent implements OnInit {
-    restaurantList: Promise<any>;
+    restaurantList: Array<Restaurant[]> = [];
     modalRef: NgbModalRef;
     id:number;
 
@@ -23,7 +24,7 @@ export class RestaurantListComponent implements OnInit {
 
     getRestaurantList(){
 
-      this.restaurantList = this.restaurantService.getRestaurantList()
+      return this.restaurantService.getRestaurantList()
         .then(successResponse => {
         this.restaurantList = successResponse;
       })

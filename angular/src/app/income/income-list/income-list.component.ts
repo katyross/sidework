@@ -89,7 +89,7 @@ export class IncomeListComponent implements OnInit {
     }
   }
 
- dateToString(dpFromDate:string,dpToDate:string){
+  dateToString(dpFromDate:string,dpToDate:string){
     dpFromDate = dpFromDate.split("-").reverse().join("/");
     dpToDate = dpToDate.split("-").reverse().join("/");
 
@@ -119,5 +119,8 @@ export class IncomeListComponent implements OnInit {
     this.modalService.open(content, { centered: true });
   }
 
+  refresh():void{
+    window.location.reload();
+  }
 
 }

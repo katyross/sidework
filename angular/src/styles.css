@@ -16,3 +16,76 @@
   position: absolute;
   text-align:right;
 }
+
+#scroll{
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+
+}
+
+#scroll tbody{
+  display:block;
+  max-height: 22.5rem;
+  overflow-y:auto;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+#scroll tbody tr{
+  display: block;
+  width: 30rem;
+}
+#scroll thead tr{
+  width: 100%;
+  display: table-header-group;
+}
+
+#scroll tr:hover, tr:hover {background-color: #369730;}
+
+.ttClass .tooltip-inner{
+  background-color: violet;
+  font-size: 100%;
+}
+.ttClass .arrow::before{
+  border-top-color: violet;
+}
+
+th,td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+td {
+  font-weight: bolder;
+  color: white;
+}
+h2,th {
+  color: white;
+}
+
+.btnInfo {
+  margin-left: 15px;
+}
+
+#add {
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+}
+
+#viewInc {
+  padding-top: 50px;
+  margin: 0 auto;
+  width: 90%;
+}
+
+#viewIncButton {
+  position: center;
+}
+
+#viewIncButton .btn{
+  color: white;
+  font-weight: normal;
+}

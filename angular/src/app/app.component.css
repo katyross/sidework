@@ -1,0 +1,23 @@
+
+.card {
+  width: 35rem;
+  height: 35rem;
+  background-color: #92c78e;
+}
+
+.navCard {
+  font-family: "Arial Rounded MT Bold";
+  font-size: large;
+  color: #27a027;
+  padding-bottom: 40px;
+}
+
+.navCard h1{
+  padding-top: 15px;
+}
+
+section{
+  justify-content: center;
+  padding-top: 10px;
+  padding-right: 150px;
+}

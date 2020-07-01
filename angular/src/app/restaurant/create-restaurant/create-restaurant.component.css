@@ -6,6 +6,15 @@ h3 {
   width: 200px;
 }
 
+.modal-title{
+  color: #93c98a;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+input[type="text"]{
+  width: 100px;
+}
 
 
 

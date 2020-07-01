@@ -8,19 +8,17 @@
     </button>
   </div>
   <div class="modal-body">
-    <div *ngIf="searchType == 'findByPayDay'">
-      <select [(ngModel)]="searchTerm">
-        <option *ngFor="let aPayDay of payDayList"
-                text="{{aPayDay}}"
-                [ngValue]="aPayDay">
-        </option>
-      </select>
-      <br>
-      <br>
+
+    <div class="btn-group btn-group-vertical" data-toggle="buttons" *ngIf="searchType == 'findByPayDay'" >
+      <label class="btn active" *ngFor="let aPayDay of payDayList" >
+        <input type = "radio" [(ngModel)]="searchTerm" [value]="aPayDay">
+        <span>{{aPayDay}}</span>
+      </label>
     </div>
   </div>
+
   <div class="modal-footer">
-    <button type="submit" class="btn btn-success" (click)=" modal.close('Close click');getIncomeByParams(searchType,searchTerm)">Submit</button>
+    <button type="submit" class="btn btn-success" (click)="getIncomeByParams(searchType,searchTerm) ; modal.close('Close click')">Submit</button>
   </div>
 </ng-template>
 
@@ -101,40 +99,41 @@
   </div>
   <div class="modal-body">
     <div *ngIf="searchType == 'findByRestaurant'">
-      <select [(ngModel)]="searchTerm">
-        <option *ngFor="let aRestaurant of restaurantList"
-                text="{{aRestaurant.name}}"
-                [ngValue]="aRestaurant.name">
-        </option>
-      </select>
-      <br>
-      <br>
+      <div class="btn-group btn-group-vertical" data-toggle="buttons">
+      <label class = "btn active" *ngFor="let aRestaurant of restaurantList">
+             <input type = "radio" [(ngModel)]="searchTerm" [value]="aRestaurant?.name">
+        <span>{{aRestaurant?.name}}</span>
+      </label>
+      </div>
     </div>
   </div>
+
   <div class="modal-footer">
-    <button type="submit" class="btn btn-success" (click)="modal.close('Close click');getIncomeByParams(searchType,searchTerm)">Submit</button>
+    <button type="submit" class="btn btn-success"
+            (click)="modal.close('Cross click');
+            getIncomeByParams(searchType,searchTerm)">Submit</button>
   </div>
 </ng-template>
 
 <!--VIEW BY BUTTONS-->
-<div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="searchType">
-  <label class = "btn btn-primary" aria-pressed="true" aria-disabled="true">View Income By:</label>
-  <label class="btn btn-outline-primary mb-2 mr-2" (click)="openModal(content)" ngbButtonLabel class="btn-primary">
+<div class="btn-group btn-group-toggle" id="viewIncButton" ngbRadioGroup name="radioBasic" [(ngModel)]="searchType">
+  <label class = "btn" aria-pressed="true" aria-disabled="true">View Income By:</label>
+  <label class="btn" (click)="openModal(content)" ngbButtonLabel class="btn">
     <input ngbButton type="radio" value="findByPayDay"> PAY DAY
   </label>
-  <label class="btn btn-outline-primary mb-2 mr-2" (click)="openModal(date)" ngbButtonLabel class="btn-primary">
-      <input ngbButton type="radio" value= "findByPayPeriod"> DATES
+  <label class="btn" (click)="openModal(date)" ngbButtonLabel class="btn">
+    <input ngbButton type="radio" value= "findByPayPeriod"> DATES
   </label>
-    <label class="btn btn-outline-primary mb-2 mr-2" (click)="openModal(restaurant)" ngbButtonLabel class="btn-primary">
+  <label class="btn" (click)="openModal(restaurant)" ngbButtonLabel class="btn">
     <input ngbButton type="radio" value="findByRestaurant"> WORKPLACE
-    </label>
-  <label ngbButtonLabel class="btn-primary">
-    <input ngbButton type="radio" value="" (click)="getIncomeByParams(searchType,'')"> ALL
   </label>
-  </div>
+  <label ngbButtonLabel class="btn">
+    <input ngbButton type="radio" value="" (click)="getIncomeByParams(searchType,'');refresh()"> ALL
+  </label>
+</div>
 
 <!--TABLE-->
-    <div>
+    <div id="viewInc">
     <table class="table table-striped">
       <thead>
       <tr>
@@ -153,3 +152,4 @@
       </tbody>
     </table>
     </div>
+

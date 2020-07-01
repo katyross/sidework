@@ -1,5 +1,4 @@
 <!--SHIFT INFO-->
-
   <div class="modal-header">
     <h4 class="modal-title">Shift Details</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
@@ -9,7 +8,6 @@
   <div class="modal-body">
     <div style="width: 300px;">
 
-      <hr/>
       <div *ngIf="shift">
         <div>
           <label><b>Workplace:</b></label>{{shift.restaurant?.name}}
@@ -39,7 +37,7 @@
 <!--UPDATE SHIFT-->
       <ng-template let-modal #updateModal>
       <div class="modal-header">
-        <h4 class="modal-title">Update Shift Details</h4>
+        <h4 class="modal-title">Update Shift</h4>
         <button type="button" class="close" aria-label="Close"
                 (click)="modal.dismiss('Cross click')">
           <span aria-hidden="true">&times;</span>
@@ -64,7 +62,7 @@
                 </div>
               </form>
 
-              <ngb-timepicker [(ngModel)]="inTimeModel" [meridian]="meridian"></ngb-timepicker>
+              <ngb-timepicker size="small" [(ngModel)]="inTimeModel" [meridian]="meridian"></ngb-timepicker>
 
 
               <label>OUT TIME:</label>
@@ -80,7 +78,7 @@
                 </div>
               </form>
 
-              <ngb-timepicker [(ngModel)]="outTimeModel" [meridian]="aMeridian"></ngb-timepicker>
+              <ngb-timepicker size="small" [(ngModel)]="outTimeModel" [meridian]="aMeridian"></ngb-timepicker>
 
               <label>PAY DAY:</label>
               <form class="form-inline">
@@ -109,11 +107,6 @@
                        required [(ngModel)]="shift.ccTips"
                        name="ccTips">
               </div>
-
-                <pre>{{inTimeModel | json}}</pre>
-                <pre>{{outTimeModel| json}}</pre>
-
-
 
               <div class="form-group">
                 <label><b>CASH TIPS: </b></label>
@@ -145,17 +138,16 @@
                        name="foodSales">
               </div>
 
-              <div class="form-group">
-                <label><b>WORKPLACE: </b></label>
-                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect"
-                        required [(ngModel)] = "shift.restaurant" name="restaurant">
-                  <option
-                    *ngFor="let aRestaurant of restaurantList"
-                    [ngValue]="aRestaurant">
-                    {{aRestaurant.name}}
-                  </option>
-                </select>
-              </div>
+                <div class = "form-group">
+                  <label>WORKPLACE:</label><br>
+                  <div class="btn-group btn-group-vertical" data-toggle="buttons">
+                    <label class = "btn active" *ngFor="let aRestaurant of restaurantList">
+                      <input type = "radio" class="form-control" required [(ngModel)]="shift.restaurant"
+                             [value]="aRestaurant" name="restaurant" checked>
+                      <span>{{aRestaurant.name}}</span>
+                    </label>
+                  </div>
+                </div>
 
               <button type="submit" class="btn btn-success">Submit</button>
           </form>

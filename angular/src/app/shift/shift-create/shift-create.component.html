@@ -4,11 +4,11 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+
   <div class="modal-body">
     <div style="width: 300px;">
 
-
-      <label>IN TIME:</label>
+      <label>IN DATE:
       <form class="form-inline">
             <div class="form-group">
               <div class="input-group">
@@ -20,11 +20,13 @@
               </div>
             </div>
           </form>
+      </label>
 
+        <label>IN TIME:
         <ngb-timepicker [(ngModel)]="inTimeModel" [meridian]="meridian"></ngb-timepicker>
+        </label>
 
-
-      <label>OUT TIME:</label>
+      <label>OUT DATE:
       <form class="form-inline">
         <div class="form-group">
           <div class="input-group">
@@ -36,7 +38,9 @@
           </div>
         </div>
       </form>
+      </label>
 
+      <label>OUT TIME:
       <ngb-timepicker [(ngModel)]="outTimeModel" [meridian]="aMeridian"></ngb-timepicker>
 
       <label>PAY DAY:</label>
@@ -51,39 +55,41 @@
           </div>
         </div>
       </form>
+      </label>
+    <br>
 
       <form #createShift="ngForm">
+
         <div class="form-group">
-          <label for="foodSales">Food Sales</label>
+          <label for="foodSales">FOOD SALES:</label>
           <input type="text" class="form-control" id="foodSales" required [(ngModel)]="shift.foodSales" name="foodSales">
         </div>
 
         <div class="form-group">
-          <label for="barSales">Bar Sales</label>
+          <label for="barSales">BAR SALES:</label>
           <input type="text" class="form-control" id="barSales" required [(ngModel)]="shift.barSales" name="barSales">
         </div>
 
         <div class="form-group">
-          <label for="ccTips">Credit Card Tips</label>
+          <label for="ccTips">CREDIT CARD TIPS:</label>
           <input type="text" class="form-control" id="ccTips" required [(ngModel)]="shift.ccTips" name="ccTips">
         </div>
 
         <div class="form-group">
-          <label for="cashTips">Cash Tips</label>
+          <label for="cashTips">CASH TIPS:</label>
           <input type="text" class="form-control" id="cashTips" required [(ngModel)]="shift.cashTips" name="cashTips">
         </div>
 
         <div class = "form-group">
-          <label>Select Workplace:</label><br>
-          <select required [(ngModel)]="shift.restaurant"
-                  name = "restaurant"
-                  id="restaurant">
-            <option *ngFor="let aRestaurant of restaurantList"
-                    text="{{aRestaurant.name}}"
-                    [ngValue]="aRestaurant">
-            </option>
-          </select>
+          <label>WORKPLACE:</label><br>
+          <div class="btn-group btn-group-vertical" data-toggle="buttons">
+            <label class = "btn active" *ngFor="let aRestaurant of restaurantList">
+              <input type = "radio" class="form-control" required [(ngModel)]="shift.restaurant" [value]="aRestaurant" name="restaurant">
+              <span>{{aRestaurant.name}}</span>
+            </label>
+          </div>
         </div>
+
         <div class="modal-footer">
           <button type="submit" class="btn btn-success" (click)= "dateToString(payDayModel);
                                                                   dateAndTime(inTimeModel, inDateModel);

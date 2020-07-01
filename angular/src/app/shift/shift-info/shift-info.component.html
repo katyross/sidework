@@ -36,54 +36,70 @@
           <label><b>PAY DAY: </b></label> {{shift.payDay}}
         </div>
       </div>
-
-      <br>
-      <br>
-
-
+<!--UPDATE SHIFT-->
       <ng-template let-modal #updateModal>
       <div class="modal-header">
         <h4 class="modal-title">Update Shift Details</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <button type="button" class="close" aria-label="Close"
+                (click)="modal.dismiss('Cross click')">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div style="width: 300px;">
 
-          <hr/>
-          <hr/>
 
-          <form #editShift="ngForm" (ngSubmit)="updateShift(editShift.value); modal.close('Cross click')">
             <div *ngIf="shift">
 
-              <div class="form-group">
-                <label for="inTime">IN TIME:</label>
-                <input type="text"
-                       class="form-control"
-                       id="inTime" required
-                       [(ngModel)]="shift.inTime"
-                       name="inTime">
-              </div>
+              <label>IN TIME:</label>
+              <form class="form-inline">
+                <div class="form-group">
+                  <div class="input-group">
+                    <input  class="form-control" placeholder="yyyy/mm/dd"
+                            name= "d" [(ngModel)]="inDateModel" ngbDatepicker #d="ngbDatepicker">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                    </div>
+                  </div>
+                </div>
+              </form>
 
-              <div class="form-group">
-                <label for="outTime">OUT TIME: </label>
-                <input type="text"
-                       class="form-control"
-                       id="outTime" required
-                       [(ngModel)]="shift.outTime"
-                       name="outTime">
-              </div>
+              <ngb-timepicker [(ngModel)]="inTimeModel" [meridian]="meridian"></ngb-timepicker>
 
-              <div class="form-group">
-                <label for="payDay">PAY DAY:</label>
-                <input type="text"
-                       class="form-control"
-                       id="payDay"
-                       required [(ngModel)]="shift.payDay"
-                       name="payDay">
-              </div>
 
+              <label>OUT TIME:</label>
+              <form class="form-inline">
+                <div class="form-group">
+                  <div class="input-group">
+                    <input  class="form-control" placeholder="{{shift.outTime.substring(0,10)}}"
+                            name= "dO" [(ngModel)]="outDateModel" ngbDatepicker #dO="ngbDatepicker">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary calendar" (click)="dO.toggle()" type="button"></button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+              <ngb-timepicker [(ngModel)]="outTimeModel" [meridian]="aMeridian"></ngb-timepicker>
+
+              <label>PAY DAY:</label>
+              <form class="form-inline">
+                <div class="form-group">
+                  <div class="input-group">
+                    <input  class="form-control" placeholder="yyyy-mm-dd"
+                            name= "dO" [(ngModel)]="payDayModel" ngbDatepicker #dP="ngbDatepicker">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary calendar" (click)="dP.toggle()" type="button"></button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+              <form #editShift="ngForm" (ngSubmit)="dateToString(payDayModel);
+                                                    dateAndTime(inTimeModel,inDateModel);
+                                                    dateAndTime(outTimeModel,outDateModel);
+                                                    updateShift(editShift.value);
+                                                    modal.close('Cross click')">
               <div class="form-group">
                 <label><b>CC TIPS: </b></label>
                 <input type="text"
@@ -93,6 +109,11 @@
                        required [(ngModel)]="shift.ccTips"
                        name="ccTips">
               </div>
+
+                <pre>{{inTimeModel | json}}</pre>
+                <pre>{{outTimeModel| json}}</pre>
+
+
 
               <div class="form-group">
                 <label><b>CASH TIPS: </b></label>
@@ -137,16 +158,14 @@
               </div>
 
               <button type="submit" class="btn btn-success">Submit</button>
-            </div>
           </form>
+            </div>
         </div>
       </div>
       </ng-template>
 
-
       <button (click)="deleteShift(shift.id); activeModal.close('Close click'); refresh()" class="btn btn-danger">Delete</button>
       <button (click)="openUpdateModal(updateModal);" class="btn btn-link">Update</button><br>
-
 
     </div>
   </div>

@@ -58,7 +58,7 @@ export class ShiftCreateComponent implements OnInit {
     this.getRestaurants();
   }
 
-    onSubmit(shift: Shift) {
+  onSubmit(shift: Shift) {
     shift.payDay = this.payDate;
     shift.inTime = this.inDateAndTime;
     shift.outTime = this.outDateAndTime;
@@ -80,7 +80,6 @@ export class ShiftCreateComponent implements OnInit {
 
       });
   }
-
   // turn date obj to string
   dateToString(aDate: NgbDateStruct): string {
     // format date

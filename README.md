@@ -30,7 +30,7 @@
                  - choose between avalanch and snowball methods of debt payoffs 
                  - calculate debt payoff date 
 ### Technologies
-    java, mySQL, hibernate, angular, spring boot , probably more 
+    java, mySQL, angular, spring boot
 ### What I'll Have to Learn
     https://api.youneedabudget.com/  
 ### Project Tracker

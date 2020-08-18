@@ -21,3 +21,6 @@ section{
   padding-top: 10px;
   padding-right: 150px;
 }
+.cross-validation-error input {
+  border-left: 5px solid red;
+}

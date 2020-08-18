@@ -4,6 +4,7 @@ import { RestaurantService } from "../restaurant.service";
 import {ActivatedRoute} from '@angular/router';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
+
 @Component({
   selector: 'app-create-restaurant',
   templateUrl: './create-restaurant.component.html',
@@ -11,10 +12,9 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 })
 export class CreateRestaurantComponent{
   restaurant: Restaurant;
-
   constructor(private route: ActivatedRoute,
               private restaurantService: RestaurantService,
-              private activeModal: NgbActiveModal) {
+              public activeModal: NgbActiveModal) {
     this.restaurant = new Restaurant();
   }
 

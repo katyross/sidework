@@ -15,7 +15,7 @@ public @Data class Restaurant{
      private int id;
 
     @NotBlank(message = "Name required")
-    @Size(min=3, max=20, message = "Name must be between 3 and 20 characters")
+    @Size(min=2, max=20, message = "Name must be between 2 and 20 characters")
     private String name;
 
     @DecimalMax(value = ".20", message = "must be a percentage between .2 and 0")
@@ -30,7 +30,8 @@ public @Data class Restaurant{
 
     public Restaurant(){ }
 
-    public Restaurant( String name, double foodTipOutPCT, double barTipOutPCT, double hourlyRate){
+    public Restaurant( String name, double foodTipOutPCT,
+                       double barTipOutPCT, double hourlyRate){
         this.name = name;
         this.hourlyRate = hourlyRate;
         this.barTipOutPCT = barTipOutPCT;

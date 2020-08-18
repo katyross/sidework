@@ -15,6 +15,7 @@ import {IncomeService} from "./income/income.service";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { ShiftCreateComponent } from './shift/shift-create/shift-create.component';
 import { ShiftInfoComponent } from './shift/shift-info/shift-info.component';
+import {CustomFormsModule} from "ng2-validation";
 
 
 
@@ -42,6 +43,7 @@ import { ShiftInfoComponent } from './shift/shift-info/shift-info.component';
         AppRoutingModule,
         HttpClientModule,
         NgbModule,
+        CustomFormsModule,
     ],
 
   providers: [

@@ -18,7 +18,7 @@ export class RestaurantInfoComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private restaurantService: RestaurantService,
-              private activeModal: NgbActiveModal,
+              public activeModal: NgbActiveModal,
               private modalService: NgbModal) { }
 
   ngOnInit() {
@@ -50,7 +50,7 @@ export class RestaurantInfoComponent implements OnInit {
     this.modalService.open(content);
   }
 
-  updateRestaurant( restaurant: Restaurant){
+  updateRestaurantClick( restaurant: Restaurant){
     this.restaurant = restaurant;
     this.restaurantService.updateRestaurant(this.id,this.restaurant)
       .then(successResponse => {

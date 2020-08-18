@@ -36,47 +36,74 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+
   <div class="modal-body">
     <div style="width: 300px;">
-
-      <hr/>
-      <hr/>
       <div style="width: 300px;">
-        <form (ngSubmit)="updateRestaurant(updateForm.value);modal.close('Cross click')" #updateForm="ngForm">
+        <form (ngSubmit)="updateRestaurantClick(updateRestaurant.value);modal.close('Cross click')" #updateRestaurant="ngForm">
           <div *ngIf="restaurant">
-            <div class="form-group">
-              <label for="name">Restaurant Name</label>
-              <input type="text" value='{{restaurant.name}}'class="form-control" id="name"
-                     required [(ngModel)]="restaurant.name" name="name">
-            </div>
+            <div [hidden]="updateRestaurant.submitted">
+              <div class="cross-validation"
+                   [class.cross-validation-error]="updateRestaurant.errors?.identityRevealed
+             && (updateRestaurant.touched || updateRestaurant.dirty)">
 
-            <div class="form-group">
-              <label for="name">Server Assistant Tip Out Rate</label>
-              <input type="text" value='{{restaurant.foodTipOutPCT}}'
-                     class="form-control"
-                     id="foodTipOutPCT"
-                     required [(ngModel)]="restaurant.foodTipOutPCT"
-                     name="foodTipOutPCT">
-            </div>
+                <div class="form-group">
+                  <label for="name">Restaurant Name</label>
+                  <input class="form-control" id="name" name="name" value="{{restaurant.name}}"
+                         required minlength="2" maxlength="20"
+                         [(ngModel)]="restaurant.name" #name="ngModel">
 
-            <div class="form-group">
-              <label for="name">Bar Tip Out Rate</label>
-              <input type="text"
-                     value='{{restaurant.barTipOutPCT}}'
-                     class="form-control" id="barTipOutPCT"
-                     required [(ngModel)]="restaurant.barTipOutPCT"
-                     name="barTipOutPCT">
-            </div>
+                  <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                    <div *ngIf="name.errors?.minlength">Name must be at least 2 characters long</div>
+                    <div *ngIf="name.errors?.maxlength">Name must be less than 20 characters</div>
+                    <div *ngIf="name.errors.required">Name is required</div>
+                  </div>
+                </div>
 
-            <div class="form-group">
-              <label for="name">Hourly Rate</label>
-              <input type="text" value='{{restaurant.hourlyRate}}'
-                     class="form-control" id="hourlyRate"
-                     required [(ngModel)]="restaurant.hourlyRate"
-                     name="hourlyRate">
+                <div class="form-group">
+                  <label for="foodTipOutPCT">Server Assistant Tip Out Rate</label>
+                  <input class="form-control" id="foodTipOutPCT" #foodTipOutPCT="ngModel" value="{{restaurant.foodTipOutPCT}}"
+                         required [min]="0.0" [max]="0.2"
+                         [(ngModel)]="restaurant.foodTipOutPCT" name="foodTipOutPCT">
+
+                  <div *ngIf="foodTipOutPCT.invalid && (foodTipOutPCT.dirty || foodTipOutPCT.touched)" class="alert alert-danger">
+                    <div *ngIf="foodTipOutPCT.errors?.min">tip out must be zero or more</div>
+                    <div *ngIf="foodTipOutPCT.errors?.max">tip out cannot exceed 20%</div>
+                    <div *ngIf="foodTipOutPCT.errors?.required">Food Sales Tip Out is required, enter 0 if there is no tip out</div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="barTipOutPCT">Bar Tip Out Rate</label>
+                  <input class="form-control" id="barTipOutPCT" #barTipOutPCT="ngModel"
+                         required [min]="0.0" [max]="0.2" value="{{restaurant.barTipOutPCT}}"
+                         [(ngModel)]="restaurant.barTipOutPCT" name="barTipOutPCT">
+
+                  <div *ngIf="barTipOutPCT.invalid && (barTipOutPCT.dirty || barTipOutPCT.touched)" class="alert alert-danger">
+                    <div *ngIf="barTipOutPCT.errors?.min">tip out must be zero or more</div>
+                    <div *ngIf="barTipOutPCT.errors?.max">tip out cannot exceed 20%</div>
+                    <div *ngIf="barTipOutPCT.errors?.required">Bar Sales Tip Out is required, enter 0 if there is no tip out</div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="hourlyRate">Hourly Rate</label>
+                  <input class="form-control" id="hourlyRate" #hourlyRate="ngModel"
+                         required [min]="0.0" [max]="20.20" value="{{restaurant.hourlyRate}}"
+                         [(ngModel)]="restaurant.hourlyRate" name="hourlyRate">
+
+                  <div *ngIf="hourlyRate.invalid && (hourlyRate.dirty || hourlyRate.touched)" class="alert alert-danger">
+                    <div *ngIf="hourlyRate.errors?.min">Hourly Rate must be above $0.00 ph</div>
+                    <div *ngIf="hourlyRate.errors?.max">Hourly Rate cannot exceed $20.20 ph</div>
+                    <div *ngIf="hourlyRate.errors?.required">Hourly Rate is Required</div>
+                  </div>
+
+                </div>
+
+                <button type="submit" class="btn btn-success">Submit</button>
+              </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-success">Submit</button>
         </form>
       </div>
     </div>
